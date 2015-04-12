@@ -6,3 +6,6 @@ lib/
 
 # schedule
 .bus_schedule
+
+# keys
+.train_api_key
