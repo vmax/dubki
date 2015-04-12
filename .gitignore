@@ -2,7 +2,10 @@
 bin/
 include/
 lib/
+
+# Python
 .Python
+__pycache__/
 
 # schedule
 .bus_schedule
