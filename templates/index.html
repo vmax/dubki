@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Дубки</title>
+    </head>
+    <body>
+        <form action="" method="post">
+            <select name="_from">
+                 {% for dorm in dorms %}
+                    <option value='{{dorm}}'>{{dorms[dorm]}}</option>
+                 {% endfor %}
+            </select>
+            <button type="submit">&rarr;</button>
+            <select name="_to">
+                {% for edu in edus %}
+                    <option value='{{edu}}'>{{edus[edu]}}</option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <form action="" method="post">
+            <select name="_from">
+                {% for edu in edus %}
+                    <option value='{{edu}}'>{{edus[edu]}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">&rarr;</button>
+            <select name="_to">
+                 {% for dorm in dorms %}
+                    <option value='{{dorm}}'>{{dorms[dorm]}}</option>
+                 {% endfor %}
+            </select>
+        </form>
+    </body>
+</html>
