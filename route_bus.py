@@ -5,7 +5,7 @@ import datetime
 import json
 from urllib import request
 from datetime import datetime
-
+from datetime import timedelta
 
 BUS_API_URL = "http://dubkiapi2.appspot.com/sch"
 SCHEDULE_FILE = ".bus_schedule"
@@ -16,13 +16,12 @@ def fetch_and_save_bus_schedule():
 		F.write(schedule)
 
 # _from and _to should be in {'Одинцово', 'Дубки'}
-def get_nearest_bus(_from,_to):
+def get_nearest_bus(_from,_to,_timestamp):
 	assert _from in {'Одинцово', 'Дубки'}
 	assert _to in {'Одинцово', 'Дубки'}
 	assert _from != _to
 
-	now = datetime.now()
-	weekday = now.isoweekday()
+	weekday = _timestamp.isoweekday()
 	# today is either {'','*Суббота', '*Воскресенье'}
 	if weekday == 6:
 		if _from == 'Дубки':
@@ -40,10 +39,31 @@ def get_nearest_bus(_from,_to):
 
 	for elem in schedule:
 		if elem['from'] == _from and elem['to'] == _to:
-			nearest_buses = elem
+			current_schedule = elem
 
-	print(nearest_buses)
+	times = [time['time'] for time in current_schedule['hset']]
+	
+	# get the nearest time
 
+	delta = timedelta.max
+
+	for time in times:
+		# FIXME: asterisk indicates bus arrival // departure station is 'Славянский бульвар'
+		# it needs special handling
+		time = time.strip('*')
+		bus_time = datetime.strptime(time, '%H:%M')
+		bus_time = bus_time.replace(day=_timestamp.day, month=_timestamp.month, year=_timestamp.year)
+		newdelta = bus_time - _timestamp
+		# looking for minimum delta between current time and bus departure time
+		# and keeping in mind that bus should be in future
+		# TODO: save more than one result
+		if newdelta < delta and newdelta.days != -1:
+			bus_time_res = bus_time
+			break
+
+	# FIXME: more real arrival time?
+	query_result = {'from' : _from, 'to' : _to, 'departure': bus_time_res, 'arrival': bus_time_res + timedelta(minutes=20)}
+	return query_result
 
 # we run as a script
 if __name__ == "__main__":
