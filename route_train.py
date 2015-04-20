@@ -47,7 +47,6 @@ def get_nearest_train(_from, _to, _timestamp):
 		newdelta = train['departure'] - _timestamp
 		if newdelta.days != -1:
 			needed_train = train
-			print(needed_train)
 			break
 		else:
 			delta = newdelta

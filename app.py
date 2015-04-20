@@ -2,23 +2,11 @@
 from flask import Flask,render_template
 from flask import request
 
-import route
+from route import calculate_route,dorms,edus
 
 from datetime import datetime,timedelta
+
 app = Flask(__name__)
-
-dorms = {
-    'dubki' : 'Дубки',
-}
-
-edus = {
-    'aeroport' : 'Кочна',
-    'strogino' : 'Строгино',
-    'myasnitskaya' : 'Мясо',
-    'vavilova' : 'Вавилова',
-    'izmailovo' : 'Кирпич',
-    'tekstilshiki' : 'Текстильщики'
-}
 
 
 @app.route('/')
@@ -27,10 +15,10 @@ def root():
 
 @app.route('/', methods=['POST'])
 def route():
-	fr = request.form['_from']
-	to = request.form['_to']
-	return "%s &rarr; %s" % (fr,to)
-
+        fr = request.form['_from']
+        to = request.form['_to']
+        route = calculate_route(fr,to)
+        return render_template('route.html', _from=fr, _to=to, bus=route['bus'], train=route['train'])
 
 if __name__ == "__main__":
 	app.run()
