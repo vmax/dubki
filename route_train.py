@@ -3,6 +3,7 @@
 import urllib
 import json
 from datetime import datetime
+from datetime import timedelta
 from urllib import request
 
 API_KEY_FILE = ".train_api_key"
@@ -25,16 +26,33 @@ def get_key():
 		key = F.read()
 	return key
 
-def get_nearest_train(_from, _to):
+def get_nearest_train(_from, _to, _timestamp):
 	assert _from in STATIONS
 	assert _to in STATIONS
 
-	now = datetime.now()
+	 # schedule = json.loads(urllib.request.urlopen(form_api_url(_from, _to)).read().decode())
+	schedule =  json.loads(open('train_response_sample.json').read())
 
-	schedule = json.loads(urllib.request.urlopen(form_api_url(_from, _to)).read().decode())
+	trains = list()
+	for train in schedule['threads']:
+		_train = dict()
+		_train['arrival'] = datetime.strptime(train['arrival'],'%Y-%m-%d %H:%M:%S')
+		_train['departure'] = datetime.strptime(train['departure'],'%Y-%m-%d %H:%M:%S')
+		_train['stops'] = train['stops']
+		_train['title'] = train['thread']['title']
+		trains.append(_train)
 
-	print (schedule)
+	needed_train = None
+	for train in trains:
+		newdelta = train['departure'] - _timestamp
+		if newdelta.days != -1:
+			needed_train = train
+			print(needed_train)
+			break
+		else:
+			delta = newdelta
 
+	return needed_train
 
 def get_date():
 	return datetime.now().strftime('%Y-%m-%d')
