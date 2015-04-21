@@ -13,7 +13,7 @@ app = Flask(__name__)
 def root():
 	return render_template('index.html', dorms=dorms, edus=edus)
 
-@app.route('/', methods=['POST'])
+@app.route('/route', methods=['POST'])
 def route():
         fr = request.form['_from']
         to = request.form['_to']

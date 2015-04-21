@@ -5,7 +5,7 @@
         <title>Дубки</title>
     </head>
     <body>
-        <form action="" method="post">
+        <form action="/route" method="post">
             <select name="_from">
                  {% for dorm in dorms %}
                     <option value='{{dorm}}'>{{dorms[dorm]}}</option>
@@ -19,7 +19,7 @@
             </select>
         </form>
 
-        <form action="" method="post">
+        <form action="/route" method="post">
             <select name="_from">
                 {% for edu in edus %}
                     <option value='{{edu}}'>{{edus[edu]}}</option>

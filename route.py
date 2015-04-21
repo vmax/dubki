@@ -30,7 +30,7 @@ def calculate_route(_from, _to):
 		result['bus'] = bus
 
 		train = get_nearest_train('Одинцово', 'Беговая', bus['arrival'])
-		result['train'] =
+		result['train'] = train
 	else:
 		pass
 
