@@ -20,5 +20,9 @@ def route():
         route = calculate_route(fr,to)
         return render_template('route.html', _from=fr, _to=to, bus=route['bus'], train=route['train'])
 
+@app.route('/about')
+def about():
+	return render_template('about.html')
+
 if __name__ == "__main__":
 	app.run()
