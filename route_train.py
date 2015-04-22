@@ -12,7 +12,7 @@ TRAIN_API_URL = """https://api.rasp.yandex.net/v1.0/search/?apikey=%s&format=jso
 
 STATIONS = {
 	"Одинцово" : "c10743",
-	"Кунцево": "s9752120",
+	"Кунцево": "s9601728",
 	"Фили": "s9600821",
 	"Беговая": "s9601666",
 	"Белорусская": "s2000006"
@@ -30,8 +30,8 @@ def get_nearest_train(_from, _to, _timestamp):
 	assert _from in STATIONS
 	assert _to in STATIONS
 
-	 # schedule = json.loads(urllib.request.urlopen(form_api_url(_from, _to)).read().decode())
-	schedule =  json.loads(open('train_response_sample.json').read())
+	schedule = json.loads(urllib.request.urlopen(form_api_url(_from, _to)).read().decode())
+	#schedule =  json.loads(open('train_response_sample.json').read())
 
 	trains = list()
 	for train in schedule['threads']:
