@@ -11,11 +11,11 @@ dorms = {
 }
 
 edus = {
-    'aeroport' : 'Кочна',
+    'aeroport' : 'Кочновский проезд (метро Аэропорт)',
     'strogino' : 'Строгино',
-    'myasnitskaya' : 'Мясо',
-    'vavilova' : 'Вавилова',
-    'izmailovo' : 'Кирпич',
+    'myasnitskaya' : 'Мясницкая (метро Лубянка)',
+    'vavilova' : 'Вавилова (метро Ленинский проспект)',
+    'izmailovo' : 'Кирпичная улица (метро Семёновская)',
     'tekstilshiki' : 'Текстильщики',
     'st_basmannaya' : 'Старая Басманная'
 }
@@ -25,7 +25,7 @@ pref_stations = {
 	'aeroport': 'Белорусская',
 	'strogino': 'Кунцево',
 	'tekstilshiki': 'Беговая',
-	 'st_basmannaya': 'Кунцево'
+    'st_basmannaya': 'Кунцево'
 }
 
 # delta to pass from railway station to subway station

@@ -1,37 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
     <head>
         <meta charset='utf-8'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Дубки</title>
     </head>
-    <body>
-        <form action="/route" method="post">
-            <select name="_from">
-                 {% for dorm in dorms %}
-                    <option value='{{dorm}}'>{{dorms[dorm]}}</option>
-                 {% endfor %}
-            </select>
-            <button type="submit">&rarr;</button>
-            <select name="_to">
-                {% for edu in edus %}
-                    <option value='{{edu}}'>{{edus[edu]}}</option>
-                {% endfor %}
-            </select>
-        </form>
+    
+    <body style="padding-top: 30px">
+    <style>
+        .container
+        {
+            padding-top: 15px;
+        }
+        label
+        {
+            font-family: monospace;
+        }
+    </style>
+        
 
-        <form action="/route" method="post">
-            <select name="_from">
+        
+    <div class="container" id="header">
+        <blockquote id="quote">{{quote}}</blockquote>
+    </div>
+    
+    <div class="container" id="dorm_to_edu">
+    <form class="form" action="/route" method="post">
+        <div class="form-group">
+            <label for="_to">Я хочу добраться из Дубков в корпус</label>
+            <!-- FIXME: dummy element for POST parameter -->
+            <input value="dubki" name="_from" style="display: none" />
+            <select onchange="$('#go1')[0].disabled=false" class="form-control" id="_to" name="_to">
+                {% for edu in edus %}
+                    <option selected disabled style="display:none">&lt;выберите корпус назначения&gt;</option>
+                    <option value='{{edu}}'>{{edus[edu]}}</option>
+                {% endfor %}
+            </select>
+        </div> <!-- form-group end -->
+        <button disabled id="go1" type="submit" class="btn btn-default">Поехали!</button>
+    </form>
+    </div>
+        
+    <div class="container" id="edu_to_dorm">
+    <form class="form" action="/route" method="post">
+        <div class="form-group">
+            <label for="_from">Я хочу добраться в Дубки из корпуса</label>
+            <!-- FIXME: dummy element for POST parameter -->
+            <input value="dubki" name="_to" style="display: none" />
+            <select onchange="$('#go2')[0].disabled=false"class="form-control" id="_from" name="_from">
+            <option selected disabled style="display:none">&lt;выберите корпус отправления&gt;</option>
                 {% for edu in edus %}
                     <option value='{{edu}}'>{{edus[edu]}}</option>
                 {% endfor %}
             </select>
-            <button type="submit">&rarr;</button>
-            <select name="_to">
-                 {% for dorm in dorms %}
-                    <option value='{{dorm}}'>{{dorms[dorm]}}</option>
-                 {% endfor %}
-            </select>
-        </form>
-        <a href="/about">about</a>
+        </div> <!-- form-group end -->
+        <button disabled id="go2" type="submit" class="btn btn-default">Поехали!</button>
+    </form>
+    </div>
+    
+    <div class="container navbar" id="about">
+            <a href="/about">О проекте<sup>α</sup></a>
+    </div>
+    
     </body>
+    
 </html>
