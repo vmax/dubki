@@ -22,11 +22,11 @@
         
 
         
-    <div class="container" id="header">
+    <div class="container well" id="header">
         <blockquote id="quote">{{quote}}</blockquote>
     </div>
     
-    <div class="container" id="dorm_to_edu">
+    <div class="container well" id="dorm_to_edu">
     <form class="form" action="/route" method="post">
         <div class="form-group">
             <label for="_to">Я хочу добраться из Дубков в корпус</label>
@@ -39,11 +39,11 @@
                 {% endfor %}
             </select>
         </div> <!-- form-group end -->
-        <button disabled id="go1" type="submit" class="btn btn-default">Поехали!</button>
+        <button disabled id="go1" type="submit" class="btn btn-default pull-right">Поехали!</button>
     </form>
     </div>
         
-    <div class="container" id="edu_to_dorm">
+    <div class="container well" id="edu_to_dorm">
     <form class="form" action="/route" method="post">
         <div class="form-group">
             <label for="_from">Я хочу добраться в Дубки из корпуса</label>
@@ -60,7 +60,7 @@
     </form>
     </div>
     
-    <div class="container navbar" id="about">
+    <div class="container navbar well" style="text-align: center" id="about">
             <a href="/about">О проекте<sup>α</sup></a>
     </div>
     

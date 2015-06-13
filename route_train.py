@@ -39,6 +39,7 @@ def get_nearest_train(_from, _to, _timestamp):
 		_train['arrival'] = datetime.strptime(train['arrival'],'%Y-%m-%d %H:%M:%S')
 		_train['departure'] = datetime.strptime(train['departure'],'%Y-%m-%d %H:%M:%S')
 		_train['stops'] = train['stops']
+		_train['to'] = _to
 		_train['title'] = train['thread']['title']
 		trains.append(_train)
 

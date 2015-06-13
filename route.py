@@ -25,7 +25,7 @@ pref_stations = {
 	'aeroport': 'Белорусская',
 	'strogino': 'Кунцево',
 	'tekstilshiki': 'Беговая',
-    'st_basmannaya': 'Кунцево'
+    	'st_basmannaya': 'Кунцево'
 }
 
 # delta to pass from railway station to subway station
@@ -66,8 +66,6 @@ def calculate_route(_from, _to):
 		# adding 5 minutes to pass from bus to train
 		train = get_nearest_train('Одинцово', pref_stations[_to], bus['arrival'] + timedelta(minutes=5))
 		result['train'] = train
-
-		print(train)
 
 		subway = get_nearest_subway(
 			tts_names[pref_stations[_to]],
