@@ -1,0 +1,16 @@
+body {
+	padding-top: 30px;
+}
+
+.container {
+	padding-top: 15px;
+}
+
+.label {
+	font-size: 14px;
+	font-family: monospace;
+}
+
+.navbar {
+	text-align: center;
+}

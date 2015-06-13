@@ -3,28 +3,13 @@
     <head>
         <meta charset='utf-8'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/dubki.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Дубки</title>
     </head>
     
-    <body style="padding-top: 30px">
-    <style>
-        .container
-        {
-            padding-top: 15px;
-        }
-        label
-        {
-            font-family: monospace;
-        }
-        #edu_to_dorm
-        {
-            display: none;  /* not implemented yet, so we hide it */
-        }
-    </style>
-        
-
+    <body>
         
     <div class="container well" id="header">
         <blockquote id="quote">{{quote}}</blockquote>
@@ -48,7 +33,7 @@
     </div>
 
   
-    <div class="container well" id="edu_to_dorm">
+    <div class="container well" id="edu_to_dorm" style="display:none"> <!-- hide unimplemented -->
     <form class="form" action="/route" method="post">
         <div class="form-group">
             <label for="_from">Я хочу добраться в Дубки из корпуса</label>
@@ -65,7 +50,7 @@
     </form>
     </div>
 
-    <div class="container navbar well" style="text-align: center" id="about">
+    <div class="container navbar well" id="about">
             <a href="/about">О проекте<sup>α</sup></a>
     </div>
     

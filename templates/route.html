@@ -3,24 +3,13 @@
     <head>
         <meta charset='utf-8'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/dubki.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Маршрут</title>
     </head>
     
-    <body style="padding-top: 30px">
-    <style>
-        .container
-        {
-            padding-top: 15px;
-        }
-        label
-        {
-            font-size: 14px;
-            font-family: monospace;
-        }
-    </style>
-    
+    <body>
         <div class='container well'>
            <h1>Сядьте на ближайший автобус</h1>
                 <label>{{bus['from']}} ({{bus['departure'].strftime('%H:%M')}}) &rarr; {{bus['to']}} ({{bus['arrival'].strftime('%H:%M')}})
