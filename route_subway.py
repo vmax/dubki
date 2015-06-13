@@ -8,11 +8,16 @@ subway_data = {
 	'Кунцевская': {
 		'Строгино':  timedelta(minutes=15),
 		'Семёновская': timedelta(minutes=28),
-		'Курская': timedelta(minutes=21)
+		'Курская': timedelta(minutes=21),
+        'Ленинский проспект' : timedelta(minutes=28)
 	},
 	'Белорусская': {
 		'Аэропорт': timedelta(minutes=6)
-	}
+	},
+    'Беговая' : {
+        'Текстильщики' : timedelta(minutes=22),
+        'Лубянка' : timedelta(minutes=12)
+    }
 }
 
 

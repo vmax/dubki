@@ -61,6 +61,11 @@ def get_nearest_bus(_from,_to,_timestamp):
 			bus_time_res = bus_time
 			break
 
+	# fixing the parameter for pretty displaying
+	# we like 'Дубки' better than 'ДубкиСуббота'
+	_from = _from.replace('Суббота','').replace('Воскресенье','')
+	_to = _to.replace('Суббота','').replace('Воскресенье','')
+            
 	# FIXME: more real arrival time?
 	query_result = {'from' : _from, 'to' : _to, 'departure': bus_time_res, 'arrival': bus_time_res + timedelta(minutes=20)}
 	return query_result

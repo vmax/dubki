@@ -25,7 +25,10 @@ pref_stations = {
 	'aeroport': 'Белорусская',
 	'strogino': 'Кунцево',
 	'tekstilshiki': 'Беговая',
-    	'st_basmannaya': 'Кунцево'
+	'st_basmannaya': 'Кунцево',
+	'vavilova' : 'Кунцево',
+	'myasnitskaya' : 'Беговая',
+	'izmailovo' : 'Кунцево'
 }
 
 # delta to pass from railway station to subway station
@@ -46,9 +49,11 @@ tts_names = {
 subways = {
 	'aeroport': 'Аэропорт',
 	'myasnitskaya': 'Лубянка',
-	'izmailovo':  'Семеновская',
 	'strogino': 'Строгино',
-	'st_basmannaya':  'Курская'
+	'st_basmannaya':  'Курская',
+	'tekstilshiki': 'Текстильщики',
+	'vavilova' : 'Ленинский проспект',
+	'izmailovo' : 'Семёновская'
 }
 
 def calculate_route(_from, _to):
