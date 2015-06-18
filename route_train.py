@@ -24,7 +24,7 @@ def form_api_url(_from,_to,_timestamp):
 def get_key():
 	with open(API_KEY_FILE) as F:
 		key = F.read()
-	return key
+	return key.strip()
 
 def get_nearest_train(_from, _to, _timestamp):
 	assert _from in STATIONS
@@ -55,9 +55,6 @@ def get_nearest_train(_from, _to, _timestamp):
 			delta = newdelta
 
 	return needed_train
-
-def get_date():
-	return
 
 # we run as a script
 if __name__ == "__main__":
