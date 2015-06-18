@@ -16,7 +16,10 @@ subway_data = {
 	},
    	'Беговая' : {
         		'Текстильщики' : timedelta(minutes=22),
-        		'Лубянка' : timedelta(minutes=12)
+        		'Лубянка' : timedelta(minutes=12),
+        		'Шаболовская' : timedelta(minutes=20),
+        		'Кузнецкий мост': timedelta(minutes=9)
+
     }
 }
 
