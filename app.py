@@ -6,6 +6,11 @@ from route import calculate_route,dorms,edus
 
 from datetime import datetime,timedelta
 
+
+# pythonanywhere
+from os import environ
+environ['TZ'] = 'Europe/Moscow'
+
 app = Flask(__name__)
 
 
