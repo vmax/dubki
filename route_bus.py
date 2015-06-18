@@ -53,13 +53,15 @@ def get_nearest_bus(_from,_to,_timestamp):
 		time = time.strip('*')
 		bus_time = datetime.strptime(time, '%H:%M')
 		bus_time = bus_time.replace(day=_timestamp.day, month=_timestamp.month, year=_timestamp.year)
+		if bus_time < _timestamp:
+			bus_time += timedelta(days=1)
 		newdelta = bus_time - _timestamp
 		# looking for minimum delta between current time and bus departure time
 		# and keeping in mind that bus should be in future
 		# TODO: save more than one result
-		if newdelta < delta and newdelta.days != -1:
+		if newdelta < delta:
+			delta = newdelta
 			bus_time_res = bus_time
-			break
 
 	# fixing the parameter for pretty displaying
 	# we like 'Дубки' better than 'ДубкиСуббота'

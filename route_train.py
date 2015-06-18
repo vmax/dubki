@@ -18,8 +18,8 @@ STATIONS = {
 	"Белорусская": "s2000006"
 }
 
-def form_api_url(_from,_to):
-	return TRAIN_API_URL % (get_key(),get_date(),STATIONS[_from],STATIONS[_to])
+def form_api_url(_from,_to,_timestamp):
+	return TRAIN_API_URL % (get_key(),_timestamp.strftime('%Y-%m-%d'),STATIONS[_from],STATIONS[_to])
 
 def get_key():
 	with open(API_KEY_FILE) as F:
@@ -30,32 +30,34 @@ def get_nearest_train(_from, _to, _timestamp):
 	assert _from in STATIONS
 	assert _to in STATIONS
 
-	schedule = json.loads(urllib.request.urlopen(form_api_url(_from, _to)).read().decode())
-	#schedule =  json.loads(open('train_response_sample.json').read())
+	schedule_today = json.loads(urllib.request.urlopen(form_api_url(_from, _to,_timestamp)).read().decode())
+	schedule_tomorrow = json.loads(urllib.request.urlopen(form_api_url(_from, _to,_timestamp+timedelta(days=1))).read().decode())
+
+	schedule = schedule_today['threads'] + schedule_tomorrow['threads']
 
 	trains = list()
-	for train in schedule['threads']:
+	for train in schedule:
 		_train = dict()
 		_train['arrival'] = datetime.strptime(train['arrival'],'%Y-%m-%d %H:%M:%S')
 		_train['departure'] = datetime.strptime(train['departure'],'%Y-%m-%d %H:%M:%S')
 		_train['stops'] = train['stops']
 		_train['to'] = _to
 		_train['title'] = train['thread']['title']
-		trains.append(_train)
+		if _train['departure'] >= _timestamp:
+			trains.append(_train)
 
-	needed_train = None
+	delta = timedelta.max
+
 	for train in trains:
 		newdelta = train['departure'] - _timestamp
-		if newdelta.days != -1:
+		if newdelta < delta:
 			needed_train = train
-			break
-		else:
 			delta = newdelta
 
 	return needed_train
 
 def get_date():
-	return datetime.now().strftime('%Y-%m-%d')
+	return
 
 # we run as a script
 if __name__ == "__main__":
