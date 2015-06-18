@@ -59,8 +59,6 @@ subways = {
 def calculate_route(_from, _to):
 	result = dict()
 	departure = datetime.now()
-	# from dorm to edu, we start by bus
-	# FIXME: add Odintsovo
 	if _from in dorms:
 		result['departure_place'] = 'dorm'
 		result['departure'] = datetime.now()
@@ -79,7 +77,17 @@ def calculate_route(_from, _to):
 
 		result['subway'] = subway
 
-	else:
-		pass
+	if _from in edus:
+		result['departure_place'] = 'edu'
+		result['departure'] = datetime.now()
+
+		subway = get_nearest_subway( subways[_from], tts_names[pref_stations[_from]], departure)
+		result['subway'] = subway
+
+		train = get_nearest_train(pref_stations[_from], 'Одинцово', subway['arrival'] + tts_deltas[pref_stations[_from]])
+		result['train'] = train
+
+		bus = get_nearest_bus('Одинцово', 'Дубки', train['arrival'] + timedelta(minutes=5))
+		result['bus'] = bus
 
 	return result

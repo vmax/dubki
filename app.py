@@ -18,7 +18,10 @@ def route():
         fr = request.form['_from']
         to = request.form['_to']
         route = calculate_route(fr,to)
-        return render_template('route.html', _from=dorms.get(fr) or edus.get(fr), _to=dorms.get(to) or edus.get(to), bus=route['bus'], train=route['train'], subway=route['subway'])
+        if route['departure_place'] == 'dorm':
+            return render_template('route_dorm.html', _from=dorms.get(fr), _to=edus.get(to), bus=route['bus'], train=route['train'], subway=route['subway'])
+        elif route['departure_place'] == 'edu':
+            return render_template('route_edu.html', _from=edus.get(fr), _to=dorms.get(to), bus=route['bus'], train=route['train'], subway=route['subway'])
 
 @app.route('/about')
 def about():
