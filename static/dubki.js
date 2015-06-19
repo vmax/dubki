@@ -17,7 +17,7 @@ $(document).ready(function() {
     
     to.onchange = function(){
         go1.disabled=false;
-        $.jStorage.put('to-fav',to.value);
+        $.jStorage.set('to-fav',to.value);
         
     }
     from.onchange = function(){
