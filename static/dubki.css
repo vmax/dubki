@@ -6,9 +6,10 @@ body {
 	padding-top: 15px;
 }
 
-.label {
+label {
 	font-size: 14px;
 	font-family: monospace;
+	font-weight: 100 !important;
 }
 
 .navbar {

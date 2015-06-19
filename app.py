@@ -49,5 +49,10 @@ def fortune():
     ]
     return choice(fortune_quotes)
 
+@app.errorhandler(500)
+def internal_error():
+        return render_template('error-500.html')
+
+
 if __name__ == "__main__":
-	app.run(debug=True)
+	app.run(debug=False)
