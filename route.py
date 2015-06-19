@@ -58,7 +58,7 @@ subways = {
 	'tekstilshiki': 'Текстильщики',
 	'vavilova' : 'Ленинский проспект',
 	'izmailovo' : 'Семёновская',
-	'shabolovskaya' : 'Шаболовская'
+	'shabolovskaya' : 'Шаболовская',
 	'petrovka' : 'Кузнецкий мост'
 
 }
