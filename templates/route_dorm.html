@@ -10,22 +10,24 @@
     </head>
     
     <body>
-        <div class='container well'>
+        <div class='main'>
+        <div class='well'>
            <h1>Автобус</h1>
                 <label>{{bus['from']}} ({{bus['departure'].strftime('%H:%M')}}) &rarr; {{bus['to']}} ({{bus['arrival'].strftime('%H:%M')}})
                     </label>
         </div>
         
-         <div class='container well'>
+         <div class='well'>
             <h1>Электричка</h1>
              <label>{{train['title']}} ({{train['departure'].strftime('%H:%M')}} &rarr; {{train['arrival'].strftime('%H:%M')}})
                  </br>Остановки: {{train['stops']}}</br>
                 Выходите на станции: {{train['to']}}</label>
         </div>
         
-    	<div class='container well'>
+    	<div class='well'>
             <h1>Метро</h1>
             <label> {{subway['from']}} ({{subway['departure'].strftime('%H:%M')}}) &rarr; {{subway['to']}} ({{subway['arrival'].strftime('%H:%M')}})</label>
             </div>
+    </div>
     </body>
 </html>

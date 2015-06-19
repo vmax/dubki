@@ -2,10 +2,6 @@ body {
 	padding-top: 30px;
 }
 
-.container {
-	padding-top: 15px;
-}
-
 label {
 	font-size: 14px;
 	font-family: monospace;
@@ -14,4 +10,9 @@ label {
 
 .navbar {
 	text-align: center;
+}
+
+.main {
+    width: 800px;
+    margin: 0 auto;
 }

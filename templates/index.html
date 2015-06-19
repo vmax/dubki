@@ -4,18 +4,21 @@
         <meta charset='utf-8'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="../static/dubki.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://raw.github.com/andris9/jStorage/master/jstorage.js"></script>
+        <script src="../static/dubki.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Дубки</title>
     </head>
     
     <body>
-        
-    <div class="container well" id="header">
-        <blockquote id="quote">{{quote}}</blockquote>
+<div class='main'>
+    <div class="well" id="header">
+        <blockquote id="quote">{{quote}}                    </blockquote>
     </div>
     
-    <div class="container well" id="dorm_to_edu">
+    <div class="well" id="dorm_to_edu">
     <form class="form" action="/route" method="post">
         <div class="form-group">
             <label for="_to">Я хочу добраться из Дубков в корпус</label>
@@ -28,12 +31,12 @@
                 {% endfor %}
             </select>
         </div> <!-- form-group end -->
-        <button disabled id="go1" type="submit" class="btn btn-default pull-right">Поехали!</button>
+        <button disabled id="go1" type="submit" class="btn btn-default">Поехали!</button>
     </form>
     </div>
 
   
-    <div class="container well" id="edu_to_dorm">
+    <div class="well" id="edu_to_dorm">
     <form class="form" action="/route" method="post">
         <div class="form-group">
             <label for="_from">Я хочу добраться в Дубки из корпуса</label>
@@ -50,10 +53,10 @@
     </form>
     </div>
 
-    <div class="container navbar well" id="about">
+    <div class="navbar well" id="about">
             <a href="/about">О проекте<sup>α</sup></a>
     </div>
-    
+        </div>
     </body>
     
 </html>
