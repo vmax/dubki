@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../static/dubki.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="https://raw.github.com/andris9/jStorage/master/jstorage.js"></script>
+        <script src="https://cdn.rawgit.com/andris9/jStorage/master/jstorage.js"></script>
         <script src="../static/dubki.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Дубки</title>
@@ -24,7 +24,7 @@
             <label for="_to">Я хочу добраться из Дубков в корпус</label>
             <!-- FIXME: dummy element for POST parameter -->
             <input value="dubki" name="_from" style="display: none" />
-            <select onchange="$('#go1')[0].disabled=false" class="form-control" id="_to" name="_to">
+            <select class="form-control" id="_to" name="_to">
                 {% for edu in edus %}
                     <option selected disabled style="display:none">&lt;выберите корпус назначения&gt;</option>
                     <option value='{{edu}}'>{{edus[edu]}}</option>
@@ -42,7 +42,7 @@
             <label for="_from">Я хочу добраться в Дубки из корпуса</label>
             <!-- FIXME: dummy element for POST parameter -->
             <input value="dubki" name="_to" style="display: none" />
-            <select onchange="$('#go2')[0].disabled=false"class="form-control" id="_from" name="_from">
+            <select class="form-control" id="_from" name="_from">
             <option selected disabled style="display:none">&lt;выберите корпус отправления&gt;</option>
                 {% for edu in edus %}
                     <option value='{{edu}}'>{{edus[edu]}}</option>
