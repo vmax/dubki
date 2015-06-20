@@ -18,6 +18,12 @@
         <blockquote id="quote">{{quote}}                    </blockquote>
     </div>
     
+    <div class='well' id='businfo'>
+        <label>
+            в Одинцово: {{bus1['departure'].strftime('%H:%M')}} | в Дубки: {{bus2['departure'].strftime('%H:%M')}}
+        </label>
+    </div>
+    
     <div class="well" id="dorm_to_edu">
     <form class="form" action="/route" method="post">
         <div class="form-group">

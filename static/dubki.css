@@ -13,6 +13,10 @@ label {
 }
 
 .main {
-    width: 800px;
+    max-width: 800px;
     margin: 0 auto;
+}
+
+#businfo {
+    text-align: center;   
 }

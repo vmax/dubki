@@ -3,7 +3,7 @@ from flask import Flask,render_template
 from flask import request
 
 from route import calculate_route,dorms,edus
-
+from route_bus import get_nearest_bus
 from datetime import datetime,timedelta
 
 
@@ -16,7 +16,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-	return render_template('index.html', dorms=dorms, edus=edus, quote=fortune())
+    b1 = get_nearest_bus('Дубки','Одинцово',datetime.now())
+    b2 = get_nearest_bus('Одинцово', 'Дубки', datetime.now())
+    return render_template('index.html',dorms=dorms, edus=edus, quote=fortune(),bus1=b1,bus2=b2)
+
+
+
 
 @app.route('/route', methods=['POST'])
 def route():
