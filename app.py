@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from flask import Flask,render_template
-from flask import request
+from flask import request,redirect
 
 from route import calculate_route,dorms,edus
 from route_bus import get_nearest_bus
@@ -23,8 +23,10 @@ def root():
 
 
 
-@app.route('/route', methods=['POST'])
+@app.route('/route', methods=['POST','GET'])
 def route():
+        if request.method == 'GET':
+                return redirect('/')
         fr = request.form['_from']
         to = request.form['_to']
         route = calculate_route(fr,to)
