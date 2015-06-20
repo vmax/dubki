@@ -84,6 +84,8 @@ def calculate_route(_from, _to):
 
 		result['subway'] = subway
 
+		result['full_route_time'] = subway['arrival'] - bus['departure']
+
 	if _from in edus:
 		result['departure_place'] = 'edu'
 		result['departure'] = datetime.now()
@@ -96,5 +98,7 @@ def calculate_route(_from, _to):
 
 		bus = get_nearest_bus('Одинцово', 'Дубки', train['arrival'] + timedelta(minutes=5))
 		result['bus'] = bus
+
+		result['full_route_time'] = bus['arrival'] - subway['departure']
 
 	return result

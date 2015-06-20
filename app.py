@@ -23,6 +23,11 @@ def route():
         fr = request.form['_from']
         to = request.form['_to']
         route = calculate_route(fr,to)
+
+        # if full route takes more than 2.5 hours, consider getting a taxi
+        if route['full_route_time'].seconds / 3600 > 2.5:
+            return render_template('route_taxi.html')
+            
         if route['departure_place'] == 'dorm':
             return render_template('route_dorm.html', _from=dorms.get(fr), _to=edus.get(to), bus=route['bus'], train=route['train'], subway=route['subway'])
         elif route['departure_place'] == 'edu':
@@ -50,9 +55,9 @@ def fortune():
     return choice(fortune_quotes)
 
 @app.errorhandler(500)
-def internal_error():
+def internal_error(err):
         return render_template('error-500.html')
 
 
 if __name__ == "__main__":
-	app.run(debug=False)
+	app.run(debug=True)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import json
-from datetime import datetime
+from datetime import datetime,time
 from datetime import timedelta
 
 subway_data = {
@@ -25,8 +25,13 @@ subway_data = {
 
 subway_data_get = lambda _from, _to : subway_data.get(_from, {}).get(_to) or subway_data.get(_to, {}).get(_from)
 
+subway_closes = time(hour=1)
+subway_opens = time(hour=5, minute=50)
+
 def get_nearest_subway(_from, _to, _timestamp):
 	result = dict()
+	if subway_closes <= _timestamp.time() <= subway_opens: # subway is still closed
+		_timestamp.replace(hour=subway_opens.hour, minute=subway_opens.minute)
 	result['departure'] = _timestamp
 	result['arrival'] = result['departure'] + subway_data_get(_from,_to)
 	result['from'] = _from
