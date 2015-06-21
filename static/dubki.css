@@ -20,3 +20,12 @@ label {
 #businfo {
     text-align: center;   
 }
+
+#yandex-copyright-vert {
+    display: none;
+}
+
+@media only screen and (max-width: 760px) {
+  #yandex-copyright-vert { display: block; }
+    #yandex-copyright-horiz { display: none; }
+}

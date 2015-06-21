@@ -11,24 +11,28 @@
     
     <body>
         <div class='main'>
+        {% if bus %}
         <div class='well'>
            <h1>Автобус</h1>
                 <label>{{bus['from']}} ({{bus['departure'].strftime('%H:%M')}}) &rarr; {{bus['to']}} ({{bus['arrival'].strftime('%H:%M')}})
                     </label>
         </div>
-        
+        {% endif %}
+            
          <div class='well'>
             <h1>Электричка</h1>
              <label>{{train['title']}} ({{train['departure'].strftime('%H:%M')}} &rarr; {{train['arrival'].strftime('%H:%M')}})
                  </br>Остановки: {{train['stops']}}</br>
-                Выходите на станции: {{train['to']}}</label>
-        <iframe frameborder="0" style="overflow: hidden; border: 0; width: 740px; height: 51px;" src="http://yandex.st/rasp/media/apicc/copyright_horiz_mono.html"></iframe>
+            Выходите на станции: {{train['to']}}</label></br>
+    <iframe id='yandex-copyright-vert' frameborder='0' style="overflow: hidden; border: 0; width: 240px; height: 130px;"src="http://yandex.st/rasp/media/apicc/copyright_vert_yellow.html">
+               </iframe>
+    <iframe id='yandex-copyright-horiz' frameborder="0" style="overflow: hidden; border: 0; width: 740px; height: 51px;" src="http://yandex.st/rasp/media/apicc/copyright_horiz_mono.html"></iframe>
         </div>
         
     	<div class='well'>
             <h1>Метро</h1>
             <label> {{subway['from']}} ({{subway['departure'].strftime('%H:%M')}}) &rarr; {{subway['to']}} ({{subway['arrival'].strftime('%H:%M')}})</label>
-            </div>
+        </div>
     </div>
     </body>
 </html>
