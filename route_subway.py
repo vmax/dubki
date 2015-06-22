@@ -20,7 +20,18 @@ subway_data = {
         		'Шаболовская' : timedelta(minutes=20),
         		'Кузнецкий мост': timedelta(minutes=9)
 
-    }
+    	},
+    	'Славянский бульвар': {
+    		'Строгино':  timedelta(minutes=18),
+		'Семёновская': timedelta(minutes=25),
+		'Курская': timedelta(minutes=18),
+        		'Ленинский проспект' : timedelta(minutes=25),
+        		'Аэропорт': timedelta(minutes=26),
+        		'Текстильщики' : timedelta(minutes=35),
+        		'Лубянка' : timedelta(minutes=21),
+        		'Шаболовская' : timedelta(minutes=22),
+        		'Кузнецкий мост': timedelta(minutes=22)
+    	}
 }
 
 subway_data_get = lambda _from, _to : subway_data.get(_from, {}).get(_to) or subway_data.get(_to, {}).get(_from)

@@ -68,10 +68,17 @@ def calculate_route(_from, _to):
 	departure = datetime.now()
 	if _from in dorms:
 		result['departure_place'] = 'dorm'
-		result['departure'] = datetime.now()
+		result['departure'] = departure
 		
 		bus = get_nearest_bus('Дубки', 'Одинцово',result['departure'])
 		result['bus'] = bus
+
+		if bus['to'] == 'Славянский бульвар': # blvd bus, we don't need train
+			subway = get_nearest_subway('Славянский бульвар',  subways[_to], bus['arrival'] + timedelta(minutes = 5))
+			result['train'] = None
+			result['subway'] = subway
+			result['full_route_time'] = subway['arrival'] - bus['departure']
+			return result
 
 		# adding 5 minutes to pass from bus to train
 		train = get_nearest_train('Одинцово', pref_stations[_to], bus['arrival'] + timedelta(minutes=5))
@@ -88,10 +95,12 @@ def calculate_route(_from, _to):
 
 	if _from in edus:
 		result['departure_place'] = 'edu'
-		result['departure'] = datetime.now()
+		result['departure'] = departure
 
 		subway = get_nearest_subway( subways[_from], tts_names[pref_stations[_from]], departure)
 		result['subway'] = subway
+
+		# TODO: add blvd buses
 
 		train = get_nearest_train(pref_stations[_from], 'Одинцово', subway['arrival'] + tts_deltas[pref_stations[_from]])
 		result['train'] = train

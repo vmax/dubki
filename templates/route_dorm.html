@@ -19,6 +19,7 @@
         </div>
         {% endif %}
             
+        {% if train %}
          <div class='well'>
             <h1>Электричка</h1>
              <label>{{train['title']}} ({{train['departure'].strftime('%H:%M')}} &rarr; {{train['arrival'].strftime('%H:%M')}})
@@ -28,11 +29,14 @@
                </iframe>
     <iframe id='yandex-copyright-horiz' frameborder="0" style="overflow: hidden; border: 0; width: 740px; height: 51px;" src="http://yandex.st/rasp/media/apicc/copyright_horiz_mono.html"></iframe>
         </div>
+        {% endif %}
         
-    	<div class='well'>
+        {% if subway %}
+    <div class='well'>
             <h1>Метро</h1>
             <label> {{subway['from']}} ({{subway['departure'].strftime('%H:%M')}}) &rarr; {{subway['to']}} ({{subway['arrival'].strftime('%H:%M')}})</label>
         </div>
+        {% endif %}
     </div>
     </body>
 </html>
