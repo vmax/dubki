@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from flask import Flask,render_template
-from flask import request,redirect
+from flask import request,redirect,json
 
 from route import calculate_route,dorms,edus
 from route_bus import get_nearest_bus
@@ -20,6 +20,36 @@ def root():
     b2 = get_nearest_bus('Одинцово', 'Дубки', datetime.now())
     return render_template('index.html',dorms=dorms, edus=edus, quote=fortune(),bus1=b1,bus2=b2)
 
+class DateTimeAwareJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return {
+                '__type__' : 'datetime',
+                'year' : obj.year,
+                'month' : obj.month,
+                'day' : obj.day,
+                'hour' : obj.hour,
+                'minute' : obj.minute,
+                'second' : obj.second,
+                'microsecond' : obj.microsecond,
+            }   
+        
+        elif isinstance(obj, timedelta):
+            return {
+                '__type__' : 'timedelta',
+                'days' : obj.days,
+                'seconds' : obj.seconds,
+                'microseconds' : obj.microseconds,
+            }
+        else:
+            return JSONEncoder.default(self, obj)
+
+
+@app.route('/route_json', methods=['POST'])
+def route_json():
+    fr = request.form['_from']
+    to = request.form['_to']
+    return json.dumps(calculate_route(fr,to), cls=DateTimeAwareJSONEncoder)
 
 
 
