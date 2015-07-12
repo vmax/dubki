@@ -65,7 +65,7 @@ subways = {
 
 def calculate_route(_from, _to):
 	result = dict()
-	departure = datetime.now()
+	departure = datetime.now() + timedelta(minutes=10) # FIXME
 	if _from in dorms:
 		result['departure_place'] = 'dorm'
 		result['departure'] = departure
