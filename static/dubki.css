@@ -20,6 +20,9 @@ label {
 #businfo {
     text-align: center;   
 }
+#arrival {
+    text-align: center;
+}
 
 #yandex-copyright-vert {
     display: none;

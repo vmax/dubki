@@ -5,6 +5,7 @@ from datetime import timedelta
 from route_bus import get_nearest_bus
 from route_train import get_nearest_train
 from route_subway import get_nearest_subway
+from route_onfoot import get_nearest_onfoot
 
 dorms = {
     'dubki' : 'Дубки',
@@ -91,13 +92,20 @@ def calculate_route(_from, _to):
 
 		result['subway'] = subway
 
-		result['full_route_time'] = subway['arrival'] - bus['departure']
+		onfoot = get_nearest_onfoot (_to,subway['arrival'])
+		result['onfoot'] = onfoot
+
+		result['full_route_time'] = onfoot['arrival'] - bus['departure']
+		result['arrival'] = onfoot['arrival']
 
 	if _from in edus:
 		result['departure_place'] = 'edu'
 		result['departure'] = departure
 
-		subway = get_nearest_subway( subways[_from], tts_names[pref_stations[_from]], departure)
+		onfoot = get_nearest_onfoot(_from,departure)
+		result['onfoot'] = onfoot
+
+		subway = get_nearest_subway( subways[_from], tts_names[pref_stations[_from]], onfoot['arrival'])
 		result['subway'] = subway
 
 		# TODO: add blvd buses
@@ -108,6 +116,7 @@ def calculate_route(_from, _to):
 		bus = get_nearest_bus('Одинцово', 'Дубки', train['arrival'] + timedelta(minutes=5))
 		result['bus'] = bus
 
-		result['full_route_time'] = bus['arrival'] - subway['departure']
+		result['full_route_time'] = bus['arrival'] - onfoot['departure']
+		result['arrival'] = bus['arrival']
 
 	return result

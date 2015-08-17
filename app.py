@@ -6,6 +6,8 @@ from route import calculate_route,dorms,edus
 from route_bus import get_nearest_bus
 from datetime import datetime,timedelta
 
+from fortune import fortune
+
 
 # pythonanywhere
 from os import environ
@@ -66,55 +68,13 @@ def route():
             return render_template('route_taxi.html')
             
         if route['departure_place'] == 'dorm':
-            return render_template('route_dorm.html', _from=dorms.get(fr), _to=edus.get(to), bus=route['bus'], train=route['train'], subway=route['subway'])
+            return render_template('route_dorm.html', _from=dorms.get(fr), _to=edus.get(to), bus=route['bus'], train=route['train'], subway=route['subway'],onfoot=route['onfoot'],arrival=route['arrival'])
         elif route['departure_place'] == 'edu':
-            return render_template('route_edu.html', _from=edus.get(fr), _to=dorms.get(to), bus=route['bus'], train=route['train'], subway=route['subway'])
+            return render_template('route_edu.html', _from=edus.get(fr), _to=dorms.get(to), bus=route['bus'], train=route['train'], subway=route['subway'],onfoot=route['onfoot'],arrival=route['arrival'])
 
 @app.route('/about')
 def about():
 	return render_template('about.html')
-
-
-def fortune():
-    from random import choice
-    fortune_quotes = [
-'Большая дорога начинается с первого шага.',
-'В дороге и отец сыну товарищ.',
-'В игре да в попутье людей узнают.',
-'В темную ночь дорога далека.',
-'Всякому своя дорога.',
-'Где дорога, там и путь.',
-'Долог путь, да изъездчив.',
-'Дома спи, а в дороге не дремли.',
-'Домашняя дума в дорогу не годится.',
-'Дорога даже в ухабах лучше бездорожья.',
-'Дорога, по которой ходили тысячу лет, превращается в реку.',
-'Дорогу выбирай любую, а родную страну не забывай.',
-'Дорогу осилит идущий.',
-'Дорожные люди долго не спят.',
-'Знающий дорогу не устаёт.',
-'Идущий дорогу одолевает, сидящего думы одолевают.',
-'Идущий любую дорогу осилит.',
-'Каков поехал, таков и приехал.',
-'Кто знает дорогу, тот не спотыкается.',
-'Лучше плохая дорога, чем плохой попутчик.',
-'Настойчивый дорогу осилит.',
-'Не дальняя дорога учит, а ближняя.',
-'Не хвались отъездом, хвались приездом..',
-'Незнакомая дорога подобна яме.',
-'Ночь, как день; дорога, как скатерть - садись да катись!',
-'Одному ехать - и дорога долга.',
-'Открытому сердцу дорога открыта.',
-'Пешечком верней будешь.',
-'По плохой дороге далеко не уедешь.',
-'Прямая дорога - самая короткая.',
-'Слабые ноги крепнут в дороге.',
-'Тело довезу, а за душу не ручаюсь.',
-'Уступай дорогу дуракам и сумасшедшим.',
-'Что найти суждено - на дороге лежит.',
-'Шибко ехать - не скоро доехать.'
-    ]
-    return choice(fortune_quotes)
 
 @app.errorhandler(500)
 def internal_error(err):

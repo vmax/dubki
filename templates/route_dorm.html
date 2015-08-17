@@ -11,6 +11,11 @@
     
     <body>
         <div class='main'>
+
+        <div class='well' id='arrival'>
+            <label>Рассчётное время прибытия: {{arrival.strftime('%H:%M')}}</label>
+        </div>
+
         {% if bus %}
         <div class='well'>
            <h1>Автобус</h1>
@@ -37,6 +42,18 @@
             <label> {{subway['from']}} ({{subway['departure'].strftime('%H:%M')}}) &rarr; {{subway['to']}} ({{subway['arrival'].strftime('%H:%M')}})</label>
         </div>
         {% endif %}
+
+        {% if onfoot %}
+        <div class='well'>
+            <h1>Пешком</h1>
+            <label>Примерно {{onfoot['time'].seconds // 60}} минут</label></br>
+            {% if onfoot['mapsrc'] %}
+            <!-- <script type="text/javascript" charset="utf-8" src={{onfoot['mapsrc']}}></script> !-->
+            <img src={{onfoot['mapsrc']}} />
+            {% endif %}
+        </div>
+        {% endif %}
+        
     </div>
     </body>
 </html>
