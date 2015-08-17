@@ -8,8 +8,8 @@ rsync -R *.py .train_api_key templates/* static/* .pa_temp/
 cd .pa_temp
 # patch the files
 
-sed -ie 's/.train_api_key/\/home\/dubki\/app\/.train_api_key/' route_train.py
-sed -ie 's/.bus_schedule/\/home\/app\/dubki\/.bus_schedule/' route_bus.py 
+sed -e 's/.train_api_key/\/home\/dubki\/app\/.train_api_key/' -i route_train.py
+sed -e 's/.bus_schedule/\/home\/app\/dubki\/.bus_schedule/' -i route_bus.py 
 
 # archive files
 tar -cjf ../dubki.tbz2 .
