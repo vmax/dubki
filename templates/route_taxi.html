@@ -10,9 +10,11 @@
     </head>
 
      <body>
+       
         {% include 'YM.html' %}
 
         <div class="main">
+            
             <div class='well'>
                 <h1>Ваш маршрут займёт слишком долго!</h1>
                 <label>Пожалуйста, воспользуйтесь  другим транспортом</label></br>
@@ -21,11 +23,11 @@
                 	<a href="https://www.uber.com/invite/7zueeue">Зарегистрироваться (первая поездка бесплатно)</a> | <a href="uber://">Открыть приложение</a>
                 </label>
             </div>
-
-	{% include 'navbar.html' %}
+          
+                {% include 'feedback.html' %}
+                {% include 'navbar.html' %}
 
         </div>
-       
 
        </body>
        </html>

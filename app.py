@@ -55,7 +55,17 @@ def route_json():
     to = request.form['_to']
     return json.dumps(calculate_route(fr,to), cls=DateTimeAwareJSONEncoder)
 
-
+@app.route('/feedback', methods=['POST','GET'])
+def feedback():
+        if request.method == 'GET':
+                return redirect('/about')
+        elif request.method == 'POST':
+            with open('feedback.txt','a') as F:
+                time = datetime.now().strftime('%d.%m.%Y %H:%M:%S')
+                ip = request.remote_addr
+                text = request.form['feedback_text']
+                F.write ('[%s] -- [%s] -- "%s"\n' % (time,ip,text))
+                return redirect('/')
 
 @app.route('/route', methods=['POST','GET'])
 def route():
