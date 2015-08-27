@@ -3,7 +3,7 @@
 # make temp directory
 mkdir .pa_temp/
 # copy all files
-rsync -R *.py .train_api_key templates/* static/* .pa_temp/
+rsync -R *.sh *.py .train_api_key templates/* static/* .pa_temp/
 # change directory
 cd .pa_temp
 # patch the files
