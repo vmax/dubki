@@ -47,8 +47,10 @@ class DateTimeAwareJSONEncoder(json.JSONEncoder):
             return JSONEncoder.default(self, obj)
 
 
-@app.route('/route_json', methods=['POST'])
+@app.route('/route_json', methods=['POST','GET'])
 def route_json():
+    if request.method == 'GET':
+        return "There somewhen will be an API guide. Stay tuned. For now you can send me POST-requests with _from and _to params."
     fr = request.form['_from']
     to = request.form['_to']
     return json.dumps(calculate_route(fr,to), cls=DateTimeAwareJSONEncoder)
