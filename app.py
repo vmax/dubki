@@ -62,7 +62,10 @@ def feedback():
         elif request.method == 'POST':
             with open('feedback.txt','a') as F:
                 time = datetime.now().strftime('%d.%m.%Y %H:%M:%S')
-                ip = request.remote_addr
+                if request.headers.getlist("X-Forwarded-For"):
+                    ip = request.headers.getlist("X-Forwarded-For")[0]
+                else:
+                    ip = request.remote_addr
                 text = request.form['feedback_text']
                 F.write ('[%s] -- [%s] -- "%s"\n' % (time,ip,text))
                 return redirect('/')
