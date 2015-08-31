@@ -17,4 +17,4 @@ __pycache__/
 .DS_Store
 
 # PA stuff
-dubki.tbz2
+dubki-*.tbz2
