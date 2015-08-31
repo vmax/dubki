@@ -14,7 +14,9 @@ map_sources = {
 	'shabolovskaya'  : '0enMIqcJ_dLy8ShEHN34Lu-4XBAHsrno',
 	'petrovka'  :  'pSiE6gI2ftRfAGBDauSW0G0H2o9R726u',
 	'paveletskaya': '1SimW8pYfuzER0tbTEYFs1RFaNUFnhh-',
-	'ilyinka': '7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq'
+	'ilyinka': '7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq',
+	'trehsvyat_b': '_WWkurGGUbabsiPE9xgdLP_iJ61vbJrZ',
+	'trehsvyat_m': 'jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9'
 }
 
 deltas = {
@@ -28,7 +30,9 @@ deltas = {
 	'shabolovskaya'  : timedelta (minutes=4),
 	'petrovka'  : timedelta (minutes=6),
 	'paveletskaya': timedelta (minutes=5),
-	'ilyinka': timedelta (minutes=7)
+	'ilyinka': timedelta (minutes=7),
+	'trehsvyat_b': timedelta(minutes=13),
+	'trehsvyat_m': timedelta(minutes=15) 
  }
 
 def form_map_url (edu, type='img'):

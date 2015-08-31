@@ -22,7 +22,9 @@ edus = {
     'shabolovskaya' : 'Шаболовская',
     'petrovka' : 'Петровка (метро Кузнецкий мост)',
     'paveletskaya':'Малая Пионерская (метро Павелецкая)',
-    'ilyinka': 'Ильинка (метро Китай-город)'
+    'ilyinka': 'Ильинка (метро Китай-город)',
+    'trehsvyat_b': 'Большой Трёхсвятительский переулок (метро Китай-город)',
+    'trehsvyat_m': 'Малый Трёхсвятительский переулок (метро Китай-город)'
 }
 
 # maps edus to preferred stations
@@ -37,7 +39,9 @@ pref_stations = {
 	'shabolovskaya' : 'Беговая',
 	'petrovka' : 'Беговая',
 	'paveletskaya':'Беговая',
-	'ilyinka': 'Беговая'
+	'ilyinka': 'Беговая',
+	'trehsvyat_b' : 'Беговая',
+	'trehsvyat_m' : 'Беговая'
 }
 
 # delta to pass from railway station to subway station
@@ -66,7 +70,9 @@ subways = {
 	'shabolovskaya' : 'Шаболовская',
 	'petrovka' : 'Кузнецкий мост',
 	'paveletskaya': 'Павелецкая',
-	'ilyinka' : 'Китай-город'
+	'ilyinka' : 'Китай-город',
+	'trehsvyat_b' : 'Китай-город',
+	'trehsvyat_m' : 'Китай-город'
 }
 
 def calculate_route(_from, _to):
