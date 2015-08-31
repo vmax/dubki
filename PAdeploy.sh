@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # make temp directory
 mkdir .pa_temp/
@@ -13,9 +13,10 @@ mv route_train_PA.py route_train.py
 mv route_bus_PA.py route_bus.py
 
 
+LAST_COMMIT_HASH="$(git rev-parse HEAD)"
 
 # archive files
-tar -cjf ../dubki.tbz2 .
+tar -cjf ../dubki-${LAST_COMMIT_HASH}.tbz2 .
 # change directory back
 cd ..
 # delete temp files
