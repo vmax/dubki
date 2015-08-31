@@ -20,7 +20,8 @@ edus = {
     'tekstilshiki' : 'Текстильщики',
     'st_basmannaya' : 'Старая Басманная',
     'shabolovskaya' : 'Шаболовская',
-    'petrovka' : 'Петровка (метро Кузнецкий мост)'
+    'petrovka' : 'Петровка (метро Кузнецкий мост)',
+    'paveletskaya':'Малая Пионерская (метро Павелецкая)'
 }
 
 # maps edus to preferred stations
@@ -33,7 +34,8 @@ pref_stations = {
 	'myasnitskaya' : 'Беговая',
 	'izmailovo' : 'Кунцево',
 	'shabolovskaya' : 'Беговая',
-	'petrovka' : 'Беговая'
+	'petrovka' : 'Беговая',
+	'paveletskaya':'Беговая'
 }
 
 # delta to pass from railway station to subway station
@@ -60,7 +62,8 @@ subways = {
 	'vavilova' : 'Ленинский проспект',
 	'izmailovo' : 'Семёновская',
 	'shabolovskaya' : 'Шаболовская',
-	'petrovka' : 'Кузнецкий мост'
+	'petrovka' : 'Кузнецкий мост',
+	'paveletskaya': 'Павелецкая'
 
 }
 

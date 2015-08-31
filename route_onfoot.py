@@ -12,7 +12,8 @@ map_sources = {
 	'myasnitskaya'  : 'GGWd7qLfRklaR5KSQQpKFOiJT8RPFGO-',
 	'izmailovo'  : 'tTSwzei04UwodpOe5ThQSKwo47ZiR8aO',
 	'shabolovskaya'  : '0enMIqcJ_dLy8ShEHN34Lu-4XBAHsrno',
-	'petrovka'  :  'pSiE6gI2ftRfAGBDauSW0G0H2o9R726u'
+	'petrovka'  :  'pSiE6gI2ftRfAGBDauSW0G0H2o9R726u',
+	'paveletskaya': '1SimW8pYfuzER0tbTEYFs1RFaNUFnhh-'
 }
 
 deltas = {
@@ -24,8 +25,9 @@ deltas = {
 	'myasnitskaya'  : timedelta (minutes=6),
 	'izmailovo'  : timedelta (minutes=16),
 	'shabolovskaya'  : timedelta (minutes=4),
-	'petrovka'  : timedelta (minutes=6)
-}
+	'petrovka'  : timedelta (minutes=6),
+	'paveletskaya': timedelta (minutes=5)
+ }
 
 def form_map_url (edu, type='img'):
 	if type=='img':
