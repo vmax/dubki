@@ -21,7 +21,8 @@ edus = {
     'st_basmannaya' : 'Старая Басманная',
     'shabolovskaya' : 'Шаболовская',
     'petrovka' : 'Петровка (метро Кузнецкий мост)',
-    'paveletskaya':'Малая Пионерская (метро Павелецкая)'
+    'paveletskaya':'Малая Пионерская (метро Павелецкая)',
+    'ilyinka': 'Ильинка (метро Китай-город)'
 }
 
 # maps edus to preferred stations
@@ -35,7 +36,8 @@ pref_stations = {
 	'izmailovo' : 'Кунцево',
 	'shabolovskaya' : 'Беговая',
 	'petrovka' : 'Беговая',
-	'paveletskaya':'Беговая'
+	'paveletskaya':'Беговая',
+	'ilyinka': 'Беговая'
 }
 
 # delta to pass from railway station to subway station
@@ -63,8 +65,8 @@ subways = {
 	'izmailovo' : 'Семёновская',
 	'shabolovskaya' : 'Шаболовская',
 	'petrovka' : 'Кузнецкий мост',
-	'paveletskaya': 'Павелецкая'
-
+	'paveletskaya': 'Павелецкая',
+	'ilyinka' : 'Китай-город'
 }
 
 def calculate_route(_from, _to):
