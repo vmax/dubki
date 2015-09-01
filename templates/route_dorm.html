@@ -20,7 +20,7 @@
 
         {% if bus %}
         <div class='well'>
-           <h1>Автобус</h1>
+           <h1>🚌Автобус</h1>
                 <label>{{bus['from']}} ({{bus['departure'].strftime('%H:%M')}}) &rarr; {{bus['to']}} ({{bus['arrival'].strftime('%H:%M')}})
                     </label>
         </div>
@@ -28,7 +28,7 @@
             
         {% if train %}
          <div class='well'>
-            <h1>Электричка</h1>
+            <h1>🚆Электричка</h1>
              <label>{{train['title']}} ({{train['departure'].strftime('%H:%M')}} &rarr; {{train['arrival'].strftime('%H:%M')}})
                  </br>Остановки: {{train['stops']}}</br>
             Выходите на станции: {{train['to']}}</label></br>
@@ -40,14 +40,14 @@
         
         {% if subway %}
     <div class='well'>
-            <h1>Метро</h1>
+            <h1>🚇Метро</h1>
             <label> {{subway['from']}} ({{subway['departure'].strftime('%H:%M')}}) &rarr; {{subway['to']}} ({{subway['arrival'].strftime('%H:%M')}})</label>
         </div>
         {% endif %}
 
         {% if onfoot %}
         <div class='well'>
-            <h1>Пешком</h1>
+            <h1>🚶Пешком</h1>
             <label>Примерно {{onfoot['time'].seconds // 60}} минут</label></br>
             {% if onfoot['mapsrc'] %}
             <!-- <script type="text/javascript" charset="utf-8" src={{onfoot['mapsrc']}}></script> !-->
