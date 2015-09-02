@@ -51,7 +51,9 @@
             <label>Примерно {{onfoot['time'].seconds // 60}} минут</label></br>
             {% if onfoot['mapsrc'] %}
             <!-- <script type="text/javascript" charset="utf-8" src={{onfoot['mapsrc']}}></script> !-->
-            <img src={{onfoot['mapsrc']}} />
+            <div class='map_container'>
+                <img class='map' src={{onfoot['mapsrc']}} />
+            </div>
             {% endif %}
         </div>
         {% endif %}

@@ -33,4 +33,12 @@ label {
 @media only screen and (max-width: 760px) {
   #yandex-copyright-vert { display: block; }
     #yandex-copyright-horiz { display: none; }
+    .map_container{
+        max-width: 760px;
+    }
+}
+
+.map { 
+    max-width: 100%;
+    max-height: 100%;
 }
