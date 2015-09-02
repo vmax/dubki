@@ -32,8 +32,8 @@
             <!-- FIXME: dummy element for POST parameter -->
             <input value="dubki" name="_from" style="display: none" />
             <select class="form-control" id="_to" name="_to">
+            <option selected disabled style="display:none">&lt;выберите корпус назначения&gt;</option>
                 {% for edu in edus %}
-                    <option selected disabled style="display:none">&lt;выберите корпус назначения&gt;</option>
                     <option value='{{edu}}'>{{edus[edu]}}</option>
                 {% endfor %}
             </select>
