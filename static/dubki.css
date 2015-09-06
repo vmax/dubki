@@ -29,6 +29,10 @@ label {
 #yandex-copyright-vert {
     display: none;
 }
+#donate-link
+{
+    display: none;
+}
 
 @media only screen and (max-width: 760px) {
   #yandex-copyright-vert { display: block; }
@@ -36,6 +40,8 @@ label {
     .map_container{
         max-width: 760px;
     }
+    #donate-iframe {display: none;}
+    #donate-link {display: block;}
 }
 
 .map { 
