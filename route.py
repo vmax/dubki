@@ -84,15 +84,17 @@ def calculate_route(_from, _to):
 	if _from in dorms:
 		result['departure_place'] = 'dorm'
 		result['departure'] = departure
-		
+
 		bus = get_nearest_bus('Дубки', 'Одинцово',result['departure'])
 		result['bus'] = bus
 
 		if bus['to'] == 'Славянский бульвар': # blvd bus, we don't need train
 			subway = get_nearest_subway('Славянский бульвар',  subways[_to], bus['arrival'] + timedelta(minutes = 5))
+			onfoot = get_nearest_onfoot(_to,subway['arrival'])
 			result['train'] = None
 			result['subway'] = subway
-			result['full_route_time'] = subway['arrival'] - bus['departure']
+			result['onfoot'] = onfoot
+			result['full_route_time'] = onfoot['arrival'] - bus['departure']
 			return result
 
 		# adding 5 minutes to pass from bus to train
