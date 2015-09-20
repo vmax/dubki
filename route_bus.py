@@ -70,7 +70,7 @@ def get_nearest_bus(_from,_to,_timestamp):
 	_from = _from.replace('Суббота','').replace('Воскресенье','')
 	_to = _to.replace('Суббота','').replace('Воскресенье','')
 
-	delta = timedelta(minutes=20)
+	delta = timedelta(minutes=15)
 	# FIXME: more real arrival time?
 	if bus_time_res[1] == True: # blvd bus
 		if _to == 'Одинцово':

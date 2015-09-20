@@ -2,7 +2,7 @@
 from flask import Flask,render_template
 from flask import request,redirect,json
 
-from route import calculate_route,dorms,edus
+from route import calculate_route,calculate_route_reverse,dorms,edus
 from route_bus import get_nearest_bus
 from datetime import datetime,timedelta
 
@@ -76,16 +76,30 @@ def route():
                 return redirect('/')
         fr = request.form['_from']
         to = request.form['_to']
-        route = calculate_route(fr,to)
 
+        print(request.form)
+        if request.form['date_options'] == 'today':
+            _ts = datetime.now()
+            _tm = list(map (int, request.form['time_options'].split(':')))
+            _ts = _ts.replace(hour=_tm[0], minute=_tm[1])
+            route = calculate_route_reverse(fr,to, _ts)
+        elif request.form['date_options'] == 'tomorrow':
+             _ts = datetime.now() + timedelta(days=1)
+             _tm = list(map (int, request.form['time_options'].split(':')))
+             _ts = _ts.replace(hour=_tm[0], minute=_tm[1])
+             route = calculate_route_reverse(fr,to, _ts)
+        elif request.form['date_options'] == 'now':
+            route = calculate_route(fr,to)
+
+        print(route)
         # if full route takes more than 2.5 hours, consider getting a taxi
         if route['full_route_time'].seconds / 3600 > 2.5:
             return render_template('route_taxi.html')
             
         if route['departure_place'] == 'dorm':
-            return render_template('route_dorm.html', _from=dorms.get(fr), _to=edus.get(to), bus=route['bus'], train=route['train'], subway=route['subway'],onfoot=route['onfoot'],arrival=route['arrival'])
+            return render_template('route_dorm.html', _from=dorms.get(fr), _to=edus.get(to), bus=route['bus'], train=route['train'], subway=route['subway'],onfoot=route['onfoot'],arrival=route['arrival'],departure=route['departure'])
         elif route['departure_place'] == 'edu':
-            return render_template('route_edu.html', _from=edus.get(fr), _to=dorms.get(to), bus=route['bus'], train=route['train'], subway=route['subway'],onfoot=route['onfoot'],arrival=route['arrival'])
+            return render_template('route_edu.html', _from=edus.get(fr), _to=dorms.get(to), bus=route['bus'], train=route['train'], subway=route['subway'],onfoot=route['onfoot'],arrival=route['arrival'],departure=route['departure'])
 
 @app.route('/about')
 def about():

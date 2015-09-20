@@ -8,6 +8,15 @@ label {
 	font-weight: 100 !important;
 }
 
+#date-radio-selector {
+        margin-top: 10px;
+}
+
+#time-radio-selector {
+        margin-top: 10px;
+        display: none;
+}
+
 .navbar {
     text-align: center;
     max-width: 800px;

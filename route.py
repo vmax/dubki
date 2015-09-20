@@ -81,18 +81,17 @@ subways = {
 """
 	Calculates a route as if _timestamp is the time of arrival
 """
-def reverse_route_calculator(_from,_to,_timestamp_end):
+def calculate_route_reverse(_from,_to,_timestamp_end):
 	departure_time = _timestamp_end - timedelta(hours=2,minutes=30)
 	route = calculate_route(_from, _to, departure_time)
 	delta = _timestamp_end - route['arrival']
 
 
-	while delta > timedelta(minutes=15):
+	while route['departure'] >= datetime.now() and delta > timedelta(minutes=15):
 		departure_time += timedelta(minutes=5)
 		route = calculate_route(_from, _to, departure_time)
 		delta = _timestamp_end - route['arrival']
 	return route
-	
 
 
 def calculate_route(_from, _to, _timestamp = datetime.now() + timedelta(minutes=10)):
@@ -112,6 +111,7 @@ def calculate_route(_from, _to, _timestamp = datetime.now() + timedelta(minutes=
 			result['subway'] = subway
 			result['onfoot'] = onfoot
 			result['full_route_time'] = onfoot['arrival'] - bus['departure']
+			result['arrival'] = onfoot['arrival']
 			return result
 
 		# adding 5 minutes to pass from bus to train

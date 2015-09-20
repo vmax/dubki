@@ -15,7 +15,7 @@
         <div class='main'>
 
         <div class='well' id='arrival'>
-            <label>Рассчётное время прибытия: {{arrival.strftime('%H:%M')}}</label>
+            <label>отправление: {{departure.strftime('%H:%M')}} | прибытие: {{arrival.strftime('%H:%M')}}</label>
         </div>
 
         {% if bus %}

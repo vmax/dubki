@@ -9,6 +9,12 @@ $(document).ready(function() {
     var feedback_btn = $('#feedback-btn')[0];
     var feedback_txt = $('#feedback-text')[0];
 
+    var date_radio_selector = $('#date-radio-selector')[0];
+    var time_radio_selector = $('#time-radio-selector')[0];
+
+    var time_labels = $('.time-option-label');
+    var time_options = $('input[name=time_options]');
+
     if (go1 && go2) { // on index page
             if ($.jStorage.get('fav-station')) {
                 go1.disabled=false;
@@ -30,6 +36,40 @@ $(document).ready(function() {
                 $.jStorage.set('fav-station',from.value);
             }
     }
+
+    if (document.location.pathname == '/')  {
+            date_radio_selector.style.display = 'block';
+            time_radio_selector.style.display = 'none';
+            $('input[name=date_options]')[0].checked = true;
+    }
+
+    if (date_radio_selector) {
+                var now = new Date();
+                if (now.getHours() >= 19) {
+                    $('.date-today-label')[0].style.display = 'none';
+                } // FIXME hardcoded :(
+                date_radio_selector.onchange = function() {
+                        var date_value = $('input[name=date_options]:checked').val();
+                        date_radio_selector.style.display = 'none';
+                        time_radio_selector.style.display = 'block';
+
+                        if (date_value == 'today')
+                        {
+                            now.setHours(now.getHours() - 1);
+                            // remove the past times
+                            for (var i = 0; i < time_options.length; i++) {
+                                var cur_date = new Date();
+                                var h = parseInt(time_options[i].value.split(':')[0]);
+                                var m = parseInt(time_options[i].value.split(':')[1]);
+                                cur_date.setHours(h,m);
+                                if (cur_date < now) {
+                                    time_labels[i].style.display = 'none';
+                                    time_options[i].style.display = 'none';
+                                }
+                            }
+                        }
+                }
+        }
 
     if (document.location.pathname == '/route')  {
             if ($.jStorage.get('feedback-sent')) {
