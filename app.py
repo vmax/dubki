@@ -78,20 +78,19 @@ def route():
         to = request.form['_to']
 
         print(request.form)
-        if request.form['date_options'] == 'today':
+        if request.form.get('date_options') == 'today':
             _ts = datetime.now()
             _tm = list(map (int, request.form['time_options'].split(':')))
             _ts = _ts.replace(hour=_tm[0], minute=_tm[1])
             route = calculate_route_reverse(fr,to, _ts)
-        elif request.form['date_options'] == 'tomorrow':
+        elif request.form.get('date_options') == 'tomorrow':
              _ts = datetime.now() + timedelta(days=1)
              _tm = list(map (int, request.form['time_options'].split(':')))
              _ts = _ts.replace(hour=_tm[0], minute=_tm[1])
              route = calculate_route_reverse(fr,to, _ts)
-        elif request.form['date_options'] == 'now':
+        else:
             route = calculate_route(fr,to)
 
-        print(route)
         # if full route takes more than 2.5 hours, consider getting a taxi
         if route['full_route_time'].seconds / 3600 > 2.5:
             return render_template('route_taxi.html')
