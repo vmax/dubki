@@ -78,9 +78,9 @@ subways = {
 	'hitra': 'Китай-город'
 }
 
-def calculate_route(_from, _to):
+def calculate_route(_from, _to, _timestamp = datetime.now() + timedelta(minutes=10)):
 	result = dict()
-	departure = datetime.now() + timedelta(minutes=10) # FIXME
+	departure = _timestamp
 	if _from in dorms:
 		result['departure_place'] = 'dorm'
 		result['departure'] = departure
