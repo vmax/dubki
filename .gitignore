@@ -9,7 +9,7 @@ __pycache__/
 
 # schedule
 .bus_schedule
-train_cache_*
+train_cached_*
 
 # keys
 .train_api_key
