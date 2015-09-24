@@ -55,18 +55,41 @@ $(document).ready(function() {
 
                         if (date_value == 'today')
                         {
-                            now.setHours(now.getHours() - 1);
-                            // remove the past times
-                            for (var i = 0; i < time_options.length; i++) {
+
+                            var _arrival = new Date();
+                            var _departure = new Date();
+                            var _now = new Date();
+                            var Response = $.post('/route_json', {'_from':'dubki', '_to': $('#_to')[0].value}, success = 
+                                function() {
+                                        var Parsed = JSON.parse(Response.responseText);
+                                        var _h = Parsed['arrival']['hour'];
+                                        var _m = Parsed['arrival']['minute'];
+                                         _arrival.setHours(_h);
+                                        _arrival.setMinutes(_m);
+
+                                        _h = Parsed['departure']['hour'];
+                                        _m = Parsed['departure']['minute'];
+                                         _departure.setHours(_h);
+                                        _departure.setMinutes(_m);
+
+                                         console.log(_arrival);
+                            console.log(_departure);    
+                                        // remove the past times
+                                for (var i = 0; i < time_options.length; i++) {
                                 var cur_date = new Date();
                                 var h = parseInt(time_options[i].value.split(':')[0]);
                                 var m = parseInt(time_options[i].value.split(':')[1]);
-                                cur_date.setHours(h,m);
-                                if (cur_date < now) {
+                                cur_date.setHours(h);
+                                cur_date.setMinutes(h);
+                                if (cur_date < _arrival || _departure > _now) {
                                     time_labels[i].style.display = 'none';
                                     time_options[i].style.display = 'none';
-                                }
-                            }
+                                }                 };
+
+                           
+
+                            
+                            });
                         }
                 }
         }
