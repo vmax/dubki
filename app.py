@@ -53,7 +53,7 @@ def route_json():
         return "There somewhen will be an API guide. Stay tuned. For now you can send me POST-requests with _from and _to params."
     fr = request.form['_from']
     to = request.form['_to']
-    return json.dumps(calculate_route(fr,to), cls=DateTimeAwareJSONEncoder)
+    return json.dumps(calculate_route(fr,to,datetime.now()), cls=DateTimeAwareJSONEncoder)
 
 @app.route('/feedback', methods=['POST','GET'])
 def feedback():
@@ -89,7 +89,7 @@ def route():
              _ts = _ts.replace(hour=_tm[0], minute=_tm[1])
              route = calculate_route_reverse(fr,to, _ts)
         else:
-            route = calculate_route(fr,to)
+            route = calculate_route(fr,to,datetime.now())
 
         # if full route takes more than 2.5 hours, consider getting a taxi
         if route['full_route_time'].seconds / 3600 > 2.5:
