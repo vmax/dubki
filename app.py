@@ -15,12 +15,14 @@ environ['TZ'] = 'Europe/Moscow'
 
 app = Flask(__name__)
 
+VERSION = "VERSION_PLACEHOLDER"
+
 
 @app.route('/')
 def root():
     b1 = get_nearest_bus('Дубки','Одинцово',datetime.now())
     b2 = get_nearest_bus('Одинцово', 'Дубки', datetime.now())
-    return render_template('index.html',dorms=dorms, edus=edus, quote=fortune(),bus1=b1,bus2=b2)
+    return render_template('index.html',dorms=dorms, edus=edus, quote=fortune(),bus1=b1,bus2=b2,version=VERSION)
 
 class DateTimeAwareJSONEncoder(json.JSONEncoder):
     def default(self, obj):
