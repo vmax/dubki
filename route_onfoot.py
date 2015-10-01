@@ -17,7 +17,8 @@ map_sources = {
 	'ilyinka': '7UEkPE7kT0Bhb4rOzDbk2O57LdWBE8Lq',
 	'trehsvyat_b': '_WWkurGGUbabsiPE9xgdLP_iJ61vbJrZ',
 	'trehsvyat_m': 'jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9',
-	'hitra': 'j1cHqL5k2jw_MK31dlBLEwPPPmj72NNg'
+	'hitra': 'j1cHqL5k2jw_MK31dlBLEwPPPmj72NNg',
+	'gnezdo': '_a_UjKz_rMbmf2l_mWtsRUjlaqlRySIS'
 }
 
 deltas = {
@@ -34,7 +35,8 @@ deltas = {
 	'ilyinka': timedelta (minutes=7),
 	'trehsvyat_b': timedelta(minutes=13),
 	'trehsvyat_m': timedelta(minutes=15),
-	'hitra': timedelta(minutes=13)
+	'hitra': timedelta(minutes=13),
+	'gnezdo': timedelta(minutes=5)
  }
 
 def form_map_url (edu, type='img'):

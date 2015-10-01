@@ -12,7 +12,8 @@ subway_data = {
         		'Ленинский проспект' : timedelta(minutes=28)
 	},
 	'Белорусская': {
-		'Аэропорт': timedelta(minutes=6)
+		'Аэропорт': timedelta(minutes=6),
+		'Тверская' : timedelta(minutes=4)
 	},
    	'Беговая' : {
         		'Текстильщики' : timedelta(minutes=22),
