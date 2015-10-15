@@ -35,8 +35,10 @@ def cache_everything():
 def cache_schedule(_from, _to,_timestamp):
 	schedule_today = json.loads(urllib.request.urlopen(form_api_url(_from, _to,_timestamp)).read().decode())
 	schedule_tomorrow = json.loads(urllib.request.urlopen(form_api_url(_from, _to,_timestamp+timedelta(days=1))).read().decode())
+	schedule_tomorrow2 = json.loads(urllib.request.urlopen(form_api_url(_from, _to,_timestamp+timedelta(days=2))).read().decode())
 
-	schedule = schedule_today['threads'] + schedule_tomorrow['threads']
+
+	schedule = schedule_today['threads'] + schedule_tomorrow['threads'] + schedule_tomorrow2['threads']
 
 	with open('train_cached_%s_%s' % (STATIONS[_from], STATIONS[_to]),'w') as F:
 		json.dump(schedule, F)
