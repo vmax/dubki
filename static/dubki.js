@@ -55,7 +55,7 @@ $(document).ready(function() {
 
                         if (date_value == 'today')
                         {
-
+                            $(".time-option-label, input[name=time_options]").css("display","none")
                             var _arrival = new Date();
                             var _departure = new Date();
                             var _now = new Date();
@@ -71,9 +71,7 @@ $(document).ready(function() {
                                         _m = Parsed['departure']['minute'];
                                          _departure.setHours(_h);
                                         _departure.setMinutes(_m);
-
-                                         console.log(_arrival);
-                            console.log(_departure);    
+   
                                         // remove the past times
                                 for (var i = 0; i < time_options.length; i++) {
                                 var cur_date = new Date();
@@ -81,10 +79,12 @@ $(document).ready(function() {
                                 var m = parseInt(time_options[i].value.split(':')[1]);
                                 cur_date.setHours(h);
                                 cur_date.setMinutes(h);
-                                if (cur_date < _arrival || _departure > _now) {
-                                    time_labels[i].style.display = 'none';
-                                    time_options[i].style.display = 'none';
-                                }                 };
+                                if (cur_date >= _arrival && _departure >= _now)
+                                {
+                                    time_labels[i].style.display = 'block';
+                                    time_options[i].style.display = 'block';
+                                }
+                            };
 
                            
 
