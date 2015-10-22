@@ -7,6 +7,8 @@ from route_train import get_nearest_train
 from route_subway import get_nearest_subway
 from route_onfoot import get_nearest_onfoot
 
+from logging import critical as L
+
 dorms = {
     'dubki' : 'Дубки',
 }
@@ -85,19 +87,22 @@ subways = {
 	Calculates a route as if _timestamp is the time of arrival
 """
 def calculate_route_reverse(_from,_to,_timestamp_end):
+	L('RR%%%s,%s,%s' % (_from,_to,_timestamp_end.strftime('%Y-%m-%d %H:%M:%S')))
 	departure_time = _timestamp_end - timedelta(hours=2,minutes=30)
-	route = calculate_route(_from, _to, departure_time)
+	route = calculate_route(_from, _to, departure_time, 'RR')
 	delta = _timestamp_end - route['arrival']
 
 
 	while route['departure'] >= datetime.now() and delta > timedelta(minutes=15):
 		departure_time += timedelta(minutes=5)
-		route = calculate_route(_from, _to, departure_time)
+		route = calculate_route(_from, _to, departure_time, 'RR')
 		delta = _timestamp_end - route['arrival']
 	return route
 
 
-def calculate_route(_from, _to, _timestamp = datetime.now() + timedelta(minutes=10)):
+def calculate_route(_from, _to, _timestamp = datetime.now() + timedelta(minutes=10), src = None):
+	if not src:
+		L('R%%%s,%s,%s' % (_from,_to,_timestamp.strftime('%Y-%m-%d %H:%M:%S')))
 	result = dict()
 	departure = _timestamp
 	if _from in dorms:

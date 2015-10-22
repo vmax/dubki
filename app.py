@@ -8,6 +8,7 @@ from datetime import datetime,timedelta
 
 from fortune import fortune
 
+import logging
 
 # pythonanywhere
 from os import environ
@@ -35,7 +36,6 @@ class DateTimeAwareJSONEncoder(json.JSONEncoder):
                 'hour' : obj.hour,
                 'minute' : obj.minute,
                 'second' : obj.second,
-                'microsecond' : obj.microsecond,
             }   
         
         elif isinstance(obj, timedelta):
@@ -43,7 +43,6 @@ class DateTimeAwareJSONEncoder(json.JSONEncoder):
                 '__type__' : 'timedelta',
                 'days' : obj.days,
                 'seconds' : obj.seconds,
-                'microseconds' : obj.microseconds,
             }
         else:
             return JSONEncoder.default(self, obj)
@@ -55,7 +54,7 @@ def route_json():
         return "There somewhen will be an API guide. Stay tuned. For now you can send me POST-requests with _from and _to params."
     fr = request.form['_from']
     to = request.form['_to']
-    return json.dumps(calculate_route(fr,to,datetime.now()), cls=DateTimeAwareJSONEncoder)
+    return json.dumps(calculate_route(fr,to,datetime.now(),'JSON'), cls=DateTimeAwareJSONEncoder)
 
 @app.route('/feedback', methods=['POST','GET'])
 def feedback():
@@ -79,7 +78,6 @@ def route():
         fr = request.form['_from']
         to = request.form['_to']
 
-        print(request.form)
         if request.form.get('date_options') == 'today':
             _ts = datetime.now()
             _tm = list(map (int, request.form['time_options'].split(':')))
@@ -110,6 +108,13 @@ def about():
 def internal_error(err):
         return render_template('error-500.html')
 
+@app.before_first_request
+def logging_init():
+    logging.basicConfig(
+            datefmt = '%Y-%m-%d %H:%M:%S',
+            format = '%(asctime)s%%%(message)s',
+            filename = 'routing.log',
+            level=logging.CRITICAL)
 
 if __name__ == "__main__":
 	app.run(debug=True)
