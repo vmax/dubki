@@ -14,7 +14,7 @@ from route_bus import get_nearest_bus
 from datetime import datetime, timedelta
 
 from fortune import fortune
-from os import environ
+from os import environ, chdir
 
 from logger import make_logger
 # pythonanywhere
@@ -25,6 +25,7 @@ app = Flask(__name__)
 
 VERSION = "VERSION_PLACEHOLDER"
 
+#PYTHONANYWHERE
 
 @app.route('/')
 def root():
