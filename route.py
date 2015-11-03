@@ -17,6 +17,8 @@ from logging import critical as L
 #: list of dormitories
 DORMS = {
     'dubki': 'Дубки',
+    'odintsovo' : 'Одинцово'
+
 }
 
 #: list of education campuses
@@ -130,33 +132,35 @@ def calculate_route(_from, _to, _timestamp=datetime.now() + timedelta(minutes=10
     if not src:
         L('R%%%s,%s,%s' % (_from, _to, _timestamp.strftime('%Y-%m-%d %H:%M:%S')))
     result = dict()
+    result['_from'], result['_to'] = _from, _to
     departure = _timestamp
     if _from in DORMS:
         result['departure_place'] = 'dorm'
         result['departure'] = departure
 
-        bus = get_nearest_bus('Дубки', 'Одинцово', result['departure'])
-        result['bus'] = bus
+        if _from == 'dubki':
+            bus = get_nearest_bus('Дубки', 'Одинцово', result['departure'])
+            result['bus'] = bus
 
-        if bus['to'] == 'Славянский бульвар':  # blvd bus, we don't need train
-            subway = get_nearest_subway(
-                'Славянский бульвар',
-                SUBWAYS[_to],
-                bus['arrival'] + timedelta(minutes=5))
+            if bus['to'] == 'Славянский бульвар':  # blvd bus, we don't need train
+                subway = get_nearest_subway(
+                    'Славянский бульвар',
+                    SUBWAYS[_to],
+                    bus['arrival'] + timedelta(minutes=5))
 
-            onfoot = get_nearest_onfoot(_to, subway['arrival'])
-            result['train'] = None
-            result['subway'] = subway
-            result['onfoot'] = onfoot
-            result['full_route_time'] = onfoot['arrival'] - bus['departure']
-            result['arrival'] = onfoot['arrival']
-            return result
+                onfoot = get_nearest_onfoot(_to, subway['arrival'])
+                result['train'] = None
+                result['subway'] = subway
+                result['onfoot'] = onfoot
+                result['full_route_time'] = onfoot['arrival'] - bus['departure']
+                result['arrival'] = onfoot['arrival']
+                return result
 
         # adding 5 minutes to pass from bus to train
         train = get_nearest_train(
             'Одинцово',
             PREF_STATIONS[_to],
-            bus['arrival'] + timedelta(minutes=5))
+            (_from == 'dubki' and bus['arrival'] or departure) + timedelta(minutes=5))
         result['train'] = train
 
         subway = get_nearest_subway(
@@ -169,7 +173,11 @@ def calculate_route(_from, _to, _timestamp=datetime.now() + timedelta(minutes=10
         onfoot = get_nearest_onfoot(_to, subway['arrival'])
         result['onfoot'] = onfoot
 
-        result['full_route_time'] = onfoot['arrival'] - bus['departure']
+        if _from == 'dubki':
+            result['full_route_time'] = onfoot['arrival'] - bus['departure']
+        else:
+            result['full_route_time'] = onfoot['arrival'] - train['departure']
+
         result['arrival'] = onfoot['arrival']
 
     if _from in EDUS:
@@ -192,10 +200,13 @@ def calculate_route(_from, _to, _timestamp=datetime.now() + timedelta(minutes=10
             subway['arrival'] + TTS_DELTAS[PREF_STATIONS[_from]])
         result['train'] = train
 
-        bus = get_nearest_bus('Одинцово', 'Дубки', train['arrival'] + timedelta(minutes=5))
-        result['bus'] = bus
-
-        result['full_route_time'] = bus['arrival'] - onfoot['departure']
-        result['arrival'] = bus['arrival']
+        if _to == 'dubki':
+            bus = get_nearest_bus('Одинцово', 'Дубки', train['arrival'] + timedelta(minutes=5))
+            result['bus'] = bus
+            result['full_route_time'] = bus['arrival'] - onfoot['departure']
+            result['arrival'] = bus['arrival']
+        elif _to == 'odintsovo':
+            result['full_route_time'] = train['arrival'] - onfoot['departure']
+            result['arrival'] = train['arrival']
 
     return result

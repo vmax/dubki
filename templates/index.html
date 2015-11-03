@@ -27,11 +27,12 @@
     
     <div class="well" id="dorm_to_edu">
         
-    <form class="form" action="/route" method="post">
+    <form id='to-edu' class="form" action="/route" method="post">
         <div class="form-group">
-            <label for="_to">Я хочу добраться из Дубков в корпус</label>
-            <!-- FIXME: dummy element for POST parameter -->
-            <input value="dubki" name="_from" style="display: none" />
+            <label for="_to">Я хочу добраться из
+                    <button type='button' id="_to_button" class="btn btn-primary btn-xs">Дубков</button>
+                    в корпус</label>
+            <input value="dubki" id='to-edu-from' name="_from" style="display: none" />
             <select class="form-control" id="_to" name="_to">
             <option selected disabled style="display:none">&lt;выберите корпус назначения&gt;</option>
                 {% for edu in edus %}
@@ -85,11 +86,11 @@
 
   
     <div class="well" id="edu_to_dorm">
-    <form class="form" action="/route" method="post">
+    <form id='to-dorm' class="form" action="/route" method="post">
         <div class="form-group">
-            <label for="_from">Я хочу добраться в Дубки из корпуса</label>
-            <!-- FIXME: dummy element for POST parameter -->
-            <input value="dubki" name="_to" style="display: none" />
+            <label for="_from">Я хочу добраться в 
+            <button type='button' id="_from_button" class="btn btn-primary btn-xs">Дубки</button> из корпуса</label>
+            <input value="dubki" id='to-dorm-to' name="_to" style="display: none" />
             <select class="form-control" id="_from" name="_from">
             <option selected disabled style="display:none">&lt;выберите корпус отправления&gt;</option>
                 {% for edu in edus %}

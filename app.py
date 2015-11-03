@@ -130,8 +130,8 @@ def route():
         return render_template('route_taxi.html')
 
     context = {
-        'bus': result_route['bus'],
-        'train': result_route['train'],
+        'bus': result_route.get('bus'),
+        'train': result_route.get('train'),
         'subway': result_route['subway'],
         'onfoot': result_route['onfoot'],
         'arrival': result_route['arrival'],

@@ -29,7 +29,7 @@
                 <img class='map' src={{onfoot['mapsrc']}} />
             </div>
             {% endif %}
-              </div>
+            </div>
         {% endif %}
 
             <div class='well'>
@@ -47,11 +47,13 @@
     <iframe id='yandex-copyright-horiz' frameborder="0" style="overflow: hidden; border: 0; width: 740px; height: 51px;" src="http://yandex.st/rasp/media/apicc/copyright_horiz_mono.html"></iframe>
         </div>
        
+       {% if bus %}
         <div class='well'>
            <h1>🚌&#09;Автобус</h1>
                 <label>{{bus['from']}} ({{bus['departure'].strftime('%H:%M')}}) &rarr; {{bus['to']}} ({{bus['arrival'].strftime('%H:%M')}})
                     </label>
         </div>
+        {% endif %}
         
         {% include 'feedback.html' %}
 

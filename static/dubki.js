@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+    var _to_button = $("#_to_button")[0];
+    var _from_button = $("#_from_button")[0];
+
     var to = $("#_to")[0];
     var from = $("#_from")[0];
 
@@ -16,6 +20,30 @@ $(document).ready(function() {
     var time_options = $('input[name=time_options]');
 
     if (go1 && go2) { // on index page
+            _to_button.onclick = function(){
+                if ($("#to-edu-from")[0].value == "dubki")
+                {
+                    _to_button.innerText = "Одинцово";
+                    $("#to-edu-from")[0].value = "odintsovo";
+                }
+                else if ($("#to-edu-from")[0].value == "odintsovo"){
+                    _to_button.innerText = "Дубков";
+                    $("#to-edu-from")[0].value = "dubki";
+                }
+            };
+
+            _from_button.onclick = function(){
+                if ($("#to-dorm-to")[0].value == "dubki")
+                {
+                    _from_button.innerText = "Одинцово";
+                    $("#to-dorm-to")[0].value = "odintsovo";
+                }
+                else if ($("#to-dorm-to")[0].value == "odintsovo"){
+                    _from_button.innerText = "Дубки";
+                    $("#to-dorm-to")[0].value = "dubki";
+                }
+            };
+
             if ($.jStorage.get('fav-station')) {
                 go1.disabled=false;
                 to.value = $.jStorage.get('fav-station');
@@ -29,12 +57,14 @@ $(document).ready(function() {
             to.onchange = function(){
                 go1.disabled=false;
                 $.jStorage.set('fav-station',to.value);
+            };
 
-            }
             from.onchange = function(){
                 go2.disabled=false;
                 $.jStorage.set('fav-station',from.value);
-            }
+            };
+
+
     }
 
     if (document.location.pathname == '/')  {
@@ -59,7 +89,7 @@ $(document).ready(function() {
                             var _arrival = new Date();
                             var _departure = new Date();
                             var _now = new Date();
-                            var Response = $.post('/route_json', {'_from':'dubki', '_to': $('#_to')[0].value}, success = 
+                            var Response = $.post('/route_json', {'_from': $("#to-edu-from")[0].value, '_to': $('#_to')[0].value}, success = 
                                 function() {
                                         var Parsed = JSON.parse(Response.responseText);
                                         var _h = Parsed['arrival']['hour'];
