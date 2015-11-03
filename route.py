@@ -11,14 +11,16 @@ from route_bus import get_nearest_bus
 from route_train import get_nearest_train
 from route_subway import get_nearest_subway
 from route_onfoot import get_nearest_onfoot
+from logger import make_logger
 
-from logging import critical as L
+ROUTE_LOG = make_logger('routing.log')
+JSON_LOG = make_logger('json.log')
+REVERSE_ROUTE_LOG = make_logger('reverse_routing.log')
 
 #: list of dormitories
 DORMS = {
     'dubki': 'Дубки',
-    'odintsovo' : 'Одинцово'
-
+    'odintsovo': 'Одинцово'
 }
 
 #: list of education campuses
@@ -103,14 +105,17 @@ def calculate_route_reverse(_from, _to, _timestamp_end):
         Returns:
             route (dict): a calculated route
     """
-    L('RR%%%s,%s,%s' % (_from, _to, _timestamp_end.strftime('%Y-%m-%d %H:%M:%S')))
+    REVERSE_ROUTE_LOG("{_from} {_to} {_date}".format(
+        _from=_from,
+        _to=_to,
+        _date=_timestamp_end.strftime('%d.%m.%Y %H:%M:%S')))
     departure_time = _timestamp_end - timedelta(hours=2, minutes=30)
     route = calculate_route(_from, _to, departure_time, 'RR')
     delta = _timestamp_end - route['arrival']
 
     while route['departure'] >= datetime.now() and delta > timedelta(minutes=15):
         departure_time += timedelta(minutes=5)
-        route = calculate_route(_from, _to, departure_time, 'RR')
+        route = calculate_route(_from, _to, departure_time, 'REVERSE')
         delta = _timestamp_end - route['arrival']
     return route
 
@@ -129,8 +134,14 @@ def calculate_route(_from, _to, _timestamp=datetime.now() + timedelta(minutes=10
         Returns:
             route (dict): a calculated route
     """
-    if not src:
-        L('R%%%s,%s,%s' % (_from, _to, _timestamp.strftime('%Y-%m-%d %H:%M:%S')))
+    if src is None:  # function got called directly
+        ROUTE_LOG("{_from} {_to}".format(
+            _from=_from,
+            _to=_to))
+    elif src == 'JSON':  # called from JSON API
+        JSON_LOG("{_from} {_to}".format(
+            _from=_from,
+            _to=_to))
     result = dict()
     result['_from'], result['_to'] = _from, _to
     departure = _timestamp

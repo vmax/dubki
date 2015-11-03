@@ -16,8 +16,7 @@ from datetime import datetime, timedelta
 from fortune import fortune
 from os import environ
 
-import logging
-
+from logger import make_logger
 # pythonanywhere
 
 environ['TZ'] = 'Europe/Moscow'
@@ -79,7 +78,8 @@ def route_json():
         pass  # TODO: return an API guide link
     _from = request.form['_from']
     _to = request.form['_to']
-    _route = calculate_route(_from, _to, datetime.now(), 'JSON')
+    req_type = request.user_agent.browser and "BROWSER_JSON" or "JSON"
+    _route = calculate_route(_from, _to, datetime.now(), req_type)
     return json.dumps(_route, cls=DateTimeAwareJSONEncoder)
 
 
@@ -91,15 +91,10 @@ def feedback():
     if request.method == 'GET':
         return redirect('/about')
     elif request.method == 'POST':
-        with open('feedback.txt', 'a') as feedback_file:
-            time = datetime.now().strftime('%d.%m.%Y %H:%M:%S')
-            if request.headers.getlist("X-Forwarded-For"):
-                _ip = request.headers.getlist("X-Forwarded-For")[0]
-            else:
-                _ip = request.remote_addr
-                text = request.form['feedback_text']
-                feedback_file.write('[%s] -- [%s] -- "%s"\n' % (time, _ip, text))
-                return redirect('/')
+        log = make_logger('feedback.log')
+        text = request.form['feedback_text']
+        log(text)
+        return redirect('/')
 
 
 @app.route('/route', methods=['POST', 'GET'])
@@ -165,18 +160,6 @@ def internal_error(_):
         A function displaying a message in case of error
     """
     return render_template('error-500.html')
-
-
-@app.before_first_request
-def logging_init():
-    """
-        A function which initializes logging subsystem
-    """
-    logging.basicConfig(\
-            datefmt='%Y-%m-%d %H:%M:%S',\
-            format='%(asctime)s%%%(message)s',\
-            filename='routing.log',\
-            level=logging.CRITICAL)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -6,6 +6,7 @@ lib/
 # Python
 .Python
 __pycache__/
+*.pyc
 
 # schedule
 .bus_schedule
@@ -16,6 +17,7 @@ train_cached_*
 
 # stuff
 .DS_Store
+logs/*
 
 # PA stuff
 dubki-*.tbz2
