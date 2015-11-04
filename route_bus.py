@@ -9,13 +9,15 @@
 
 import json
 import urllib
+import os
 from urllib import request
 from datetime import datetime, timedelta
+
 
 #: URL of bus schedule API provider
 BUS_API_URL = "http://dubkiapi2.appspot.com/sch"
 #: cached bus schedule filename
-SCHEDULE_FILE = ".bus_schedule"
+SCHEDULE_FILE = os.path.join('cache/', "bus_schedule")
 
 
 def fetch_and_save_bus_schedule():

@@ -6,6 +6,8 @@ mkdir .pa_temp/
 rsync -R *.sh *.py .train_api_key templates/* static/* .pa_temp/
 # change directory
 cd .pa_temp
+# create needed directories
+mkdir logs cache
 # version
 LAST_COMMIT_HASH="$(git rev-parse HEAD)"
 # patch the files

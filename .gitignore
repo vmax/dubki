@@ -7,10 +7,10 @@ lib/
 .Python
 __pycache__/
 *.pyc
+pip-selfcheck.json
 
 # schedule
-.bus_schedule
-train_cached_*
+cache/*
 
 # keys
 .train_api_key

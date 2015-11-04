@@ -10,6 +10,7 @@
 
 import urllib
 import json
+import os
 from urllib import request
 from datetime import datetime, timedelta
 
@@ -19,6 +20,8 @@ API_KEY_FILE = ".train_api_key"
 #: URL of train schedule API provider
 TRAIN_API_URL = """https://api.rasp.yandex.net/v1.0/search/?apikey={key}\
 &format=json&date={date}&from={_from}&to={_to}&lang=ru&transport_types=suburban"""
+
+SCHEDULE_FILE = os.path.join('cache/', 'train_{_from}_{_to}')
 
 #: mapping train stations to their API codes
 STATIONS = {
@@ -95,7 +98,13 @@ def cache_schedule(_from, _to, _timestamp):
     schedule += schedule_tomorrow['threads']
     schedule += schedule_tomorrow2['threads']
 
-    with open('train_cached_%s_%s' % (STATIONS[_from], STATIONS[_to]), 'w') as cached_schedule_file:
+    resulting_filename = SCHEDULE_FILE.format(
+        _from=STATIONS[_from],
+        _to=STATIONS[_to])
+
+    with open(resulting_filename, 'w') as cached_schedule_file:
+        print("caching train schedule {_from} -> {_to}".format(
+            _from=_from, _to=_to))
         json.dump(schedule, cached_schedule_file)
 
 
@@ -109,8 +118,11 @@ def get_schedule(_from, _to, _timestamp):
             _to(str): arrival train station
             _timestamp(datetime): date to get schedule for
     """
+    resulting_filename = SCHEDULE_FILE.format(
+        _from=STATIONS[_from],
+        _to=STATIONS[_to])
     try:
-        cached_schedule_file = open('train_cached_%s_%s' % (STATIONS[_from], STATIONS[_to]))
+        cached_schedule_file = open(resulting_filename)
         return json.load(cached_schedule_file)
     except FileNotFoundError:
         cache_schedule(_from, _to, _timestamp)

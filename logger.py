@@ -8,10 +8,6 @@
 from datetime import datetime
 import os
 
-# create log dir if there isn't
-if not os.path.exists('logs/'):
-    os.makedirs('logs/')
-
 
 def log(filename, message):
     """
