@@ -84,6 +84,44 @@ def route_json():
     return json.dumps(_route, cls=DateTimeAwareJSONEncoder)
 
 
+@app.route('/route_mobile', methods=['POST'])
+def route_mobile():
+    """
+        A function providing the route for mobile devices
+
+        POST args:
+            _from (str): place of departure
+            _to (str): place of arrival
+            when(str): 'now' | 'today' | 'tomorrow'
+            when_param(str): '%H:%M' datetime for reverse routing
+            device_id(str): mobile device id for logging
+
+        Returns:
+            _route (str): JSON-formatted string with route
+    """
+    log = make_logger('route_mobile.log')
+    _from = request.form['_from']
+    _to = request.form['_to']
+    when = request.form['when']
+    when_param = request.form['when_param']
+    device_id = request.form['device_id']
+    log("{device_id} {_from} {_to}".format
+        (
+            device_id=device_id,
+            _from=_from,
+            _to=_to))
+    if when == 'now':
+        _route = calculate_route(_from, _to, datetime.now() + timedelta(minutes=10), "MOBILE")
+    else:
+        _date = datetime.now()
+        _time = [int(x) for x in when_param.split(':')]
+        _date = _date.replace(hour=_time[0], minute=_time[1])
+        if when == 'tomorrow':
+            _date += timedelta(days=1)
+        _route = calculate_route_reverse(_from, _to, _date)
+    return json.dumps(_route, cls=DateTimeAwareJSONEncoder)
+
+
 @app.route('/feedback', methods=['POST', 'GET'])
 def feedback():
     """
