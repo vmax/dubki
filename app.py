@@ -5,7 +5,7 @@
     A module with Flask web handlers
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, make_response
 from flask import request, redirect, json
 
 from route import calculate_route, calculate_route_reverse
@@ -119,7 +119,10 @@ def route_mobile():
         if when == 'tomorrow':
             _date += timedelta(days=1)
         _route = calculate_route_reverse(_from, _to, _date)
-    return json.dumps(_route, cls=DateTimeAwareJSONEncoder)
+    js_route = json.dumps(_route, cls=DateTimeAwareJSONEncoder)
+    response = make_response(js_route)
+    response.headers['Content-Type'] = 'application/json; charset=utf-8'
+    return response
 
 
 @app.route('/feedback', methods=['POST', 'GET'])
