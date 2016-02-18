@@ -109,14 +109,16 @@ def calculate_route_reverse(_from, _to, _timestamp_end):
         _from=_from,
         _to=_to,
         _date=_timestamp_end.strftime('%d.%m.%Y %H:%M:%S')))
-    departure_time = _timestamp_end - timedelta(hours=2, minutes=30)
-    route = calculate_route(_from, _to, departure_time, 'RR')
-    delta = _timestamp_end - route['arrival']
+    departure_time = _timestamp_end - timedelta(hours=3, minutes=0)
 
-    while route['departure'] >= datetime.now() and delta > timedelta(minutes=15):
-        departure_time += timedelta(minutes=5)
+    while True:
         route = calculate_route(_from, _to, departure_time, 'REVERSE')
         delta = _timestamp_end - route['arrival']
+        if delta < timedelta(minutes=15):
+            break
+        else:
+            departure_time += timedelta(minutes=5)
+
     return route
 
 
@@ -219,5 +221,11 @@ def calculate_route(_from, _to, _timestamp=datetime.now() + timedelta(minutes=10
         elif _to == 'odintsovo':
             result['full_route_time'] = train['arrival'] - onfoot['departure']
             result['arrival'] = train['arrival']
+
+    # dirty-fix the result a bit
+    if result.get('bus', None) and result['departure_place'] == 'dorm' and result['bus']['departure'] - result['departure'] > timedelta(minutes=10):
+        result['departure'] = result['bus']['departure'] - timedelta(minutes=10)
+    if not result.get('bus', None) and result['departure_place'] == 'dorm' and result['train']['departure'] - result['departure'] > timedelta(minutes=10):
+        result['departure'] = result['train']['departure'] - timedelta(minutes=10)
 
     return result
