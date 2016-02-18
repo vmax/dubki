@@ -35,7 +35,8 @@ SUBWAY_DATA = {
         'Лубянка': timedelta(minutes=21),
         'Шаболовская': timedelta(minutes=22),
         'Кузнецкий мост': timedelta(minutes=22),
-        'Тверская': timedelta(minutes=22)}
+        'Тверская': timedelta(minutes=22),
+        'Китай-город': timedelta(minutes=25)}
 }
 
 
