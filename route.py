@@ -109,17 +109,23 @@ def calculate_route_reverse(_from, _to, _timestamp_end):
         _from=_from,
         _to=_to,
         _date=_timestamp_end.strftime('%d.%m.%Y %H:%M:%S')))
+
     departure_time = _timestamp_end - timedelta(hours=3, minutes=0)
+    routes = []
 
     while True:
         route = calculate_route(_from, _to, departure_time, 'REVERSE')
-        delta = _timestamp_end - route['arrival']
-        if delta < timedelta(minutes=15):
+        if route['arrival'] < _timestamp_end:
+            routes.append(route)
+        if route['departure'] > _timestamp_end:
             break
-        else:
-            departure_time += timedelta(minutes=5)
+        departure_time += timedelta(minutes=5)
 
-    return route
+    # there are no sufficient routes available
+    if not len(routes):
+        return None
+    # and in arriving as closer to actual time as possible
+    return max(routes, key=lambda route: route['arrival'] - _timestamp_end)
 
 
 def calculate_route(_from, _to, _timestamp=datetime.now() + timedelta(minutes=10), src=None):

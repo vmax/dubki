@@ -162,6 +162,9 @@ def route():
     else:
         result_route = calculate_route(_from, _to, datetime.now())
 
+    if not result_route:
+        return "Не получилось посчитать маршрут :("
+
     # if full route takes more than 2.5 hours, consider getting a taxi
     if result_route['full_route_time'].seconds / 3600 > 2.5:
         return render_template('route_taxi.html')
