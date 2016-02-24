@@ -156,6 +156,9 @@ def route():
         result_route = calculate_route_reverse(_from, _to, _ts)
     elif request.form.get('date_options') == 'tomorrow':
         _ts = datetime.now() + timedelta(days=1)
+        # skip sunday
+        if 7 == _ts.isoweekday():
+            _ts = _ts + timedelta(days=1)
         _tm = [int(x) for x in request.form['time_options'].split(':')]
         _ts = _ts.replace(hour=_tm[0], minute=_tm[1])
         result_route = calculate_route_reverse(_from, _to, _ts)
