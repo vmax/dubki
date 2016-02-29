@@ -23,7 +23,8 @@ MAP_SOURCES = {
     'tekstilshiki': 'IcVLk9vNC1afHy5ge05Ae07wahHXZZ7H',
     'trehsvyat_b': '_WWkurGGUbabsiPE9xgdLP_iJ61vbJrZ',
     'trehsvyat_m': 'jBGwqmV8V-JjFzbG2M_13sGlAUVqug-9',
-    'vavilova': '_Cz-NprpRRfD15AECXvyxGQb5N7RY3xC'
+    'vavilova': '_Cz-NprpRRfD15AECXvyxGQb5N7RY3xC',
+    'ordynka': 'SpOVmas47ctXFTbX9GdKarOc1XvWiART'
     }
 
 #: onfoot times
@@ -35,14 +36,15 @@ DELTAS = {
     'vavilova': timedelta(minutes=5),
     'myasnitskaya': timedelta(minutes=6),
     'izmailovo': timedelta(minutes=16),
-    'shabolovskaya': timedelta(minutes=4),
+    'shabolovskaya': timedelta(minutes=5),
     'petrovka': timedelta(minutes=6),
     'paveletskaya': timedelta(minutes=5),
     'ilyinka': timedelta(minutes=7),
     'trehsvyat_b': timedelta(minutes=13),
     'trehsvyat_m': timedelta(minutes=15),
     'hitra': timedelta(minutes=13),
-    'gnezdo': timedelta(minutes=5)
+    'gnezdo': timedelta(minutes=5),
+    'ordynka': timedelta(minutes=5)
     }
 
 

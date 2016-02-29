@@ -24,7 +24,8 @@ SUBWAY_DATA = {
         'Шаболовская': timedelta(minutes=20),
         'Кузнецкий мост': timedelta(minutes=9),
         'Павелецкая': timedelta(minutes=17),
-        'Китай-город': timedelta(minutes=11)},
+        'Китай-город': timedelta(minutes=11),
+        'Третьяковская': timedelta(minutes=15)},
     'Славянский бульвар': {
         'Строгино':  timedelta(minutes=18),
         'Семёновская': timedelta(minutes=25),
@@ -36,7 +37,8 @@ SUBWAY_DATA = {
         'Шаболовская': timedelta(minutes=22),
         'Кузнецкий мост': timedelta(minutes=22),
         'Тверская': timedelta(minutes=22),
-        'Китай-город': timedelta(minutes=25)}
+        'Китай-город': timedelta(minutes=25),
+        'Третьяковская': timedelta(minutes=23)}
 }
 
 

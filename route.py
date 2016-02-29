@@ -39,7 +39,8 @@ EDUS = {
     'trehsvyat_b': 'Большой Трёхсвятительский переулок (метро Китай-город)',
     'trehsvyat_m': 'Малый Трёхсвятительский переулок (метро Китай-город)',
     'hitra': 'Хитровский переулок (метро Китай-город)',
-    'gnezdo': "Малый Гнездниковский переулок (метро Тверская)"
+    'gnezdo': "Малый Гнездниковский переулок (метро Тверская)",
+    'ordynka': 'Малая Ордынка (метро Третьяковская)'
 }
 
 #: maps education campuses to preferred railway stations
@@ -58,7 +59,9 @@ PREF_STATIONS = {
     'trehsvyat_b': 'Беговая',
     'trehsvyat_m': 'Беговая',
     'hitra': 'Беговая',
-    'gnezdo': 'Белорусская'}
+    'gnezdo': 'Белорусская',
+    'ordynka' : 'Беговая'
+}
 
 #: delta to pass from railway station to subway station
 TTS_DELTAS = {
@@ -90,7 +93,8 @@ SUBWAYS = {
     'trehsvyat_b': 'Китай-город',
     'trehsvyat_m': 'Китай-город',
     'hitra': 'Китай-город',
-    'gnezdo': 'Тверская'}
+    'gnezdo': 'Тверская',
+    'ordynka': 'Третьяковская'}
 
 
 def calculate_route_reverse(_from, _to, _timestamp_end):
