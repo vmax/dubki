@@ -29,6 +29,7 @@ VERSION = "VERSION_PLACEHOLDER"
 
 @app.route('/')
 def root():
+    return render_template('byebye.html')
     """
         Root page handler
     """
